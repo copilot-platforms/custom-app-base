@@ -1,4 +1,4 @@
-import Task, { TaskItem, TaskProps } from './Task'
+import Task, { TaskItem } from './Task'
 
 export type TaskSectionProps = {
   title: string

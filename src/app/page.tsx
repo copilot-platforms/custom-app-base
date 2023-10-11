@@ -1,7 +1,6 @@
 import { TaskItem } from '@/components/tasks/Task'
 import TaskSection from '@/components/tasks/TaskSection'
 import { Client, Company, CopilotAPI } from '@/utils/copilotApiUtils'
-import Image from 'next/image'
 
 type SearchParams = { [key: string]: string | string[] | undefined }
 
