@@ -1,34 +1,38 @@
 // import { Request, Response } from 'next';
+import PushToS3Bucket from '../../../utils/s3utils'
+import { v4 as uuidv4 } from 'uuid';
+
+
+// let x = PushToS3Bucket
 
 type Task = {
-  id: string
-  name: string
-  isCompleted: boolean
-  createdDate: Date
-  completedDate: Date
+    id: string
+    name: string
+    isCompleted: boolean
+    createdDate: Date
+    completedDate: Date
 }
 
 const sampleTask: Task = {
-  id: '394dsf',
-  name: 'Sample Task',
-  isCompleted: false,
-  createdDate: new Date(),
-  completedDate: new Date(),
+    id: '394dsf',
+    name: 'Sample Task',
+    isCompleted: false,
+    createdDate: new Date(),
+    completedDate: new Date(),
 }
 
-// export default async function handler(req: Request, res: Response) {
-//     if (req.method == "POST") {
-//         const data = await req.json()
-//         return res.json()
-//     }
-// }
-
 export const GET = async () => {
-  return Response.json(sampleTask, { status: 200 })
+    return Response.json(sampleTask, { status: 200 })
 }
 
 export async function POST(req: Request, res: Response) {
-  const data = await res.json()
-  console.log(data)
-  return Response.json(data)
+    const inputData = await req.json()
+    // const task: Task = inputData
+    const newId = uuidv4()
+    inputData.id = newId
+
+   const result = await PushToS3Bucket({ taskId: newId, jsonString: JSON.stringify(inputData) })
+    
+    // console.log(data)
+    return Response.json(result)
 }
