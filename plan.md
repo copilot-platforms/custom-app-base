@@ -1,6 +1,8 @@
-# models / backend
-## v1
-### Task
+# v1
+
+## backend
+
+### Task model
 - id
 - name
 - isCompleted
@@ -11,6 +13,6 @@
 - key format is ID
 - save as JSON object
 
-Frontend
+## frontend
 - show tasks
 - mark complete
