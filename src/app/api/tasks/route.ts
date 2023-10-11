@@ -1,19 +1,19 @@
 // import { Request, Response } from 'next';
 
 type Task = {
-    id: String,
-    name: String,
-    isCompleted: Boolean,
-    createdDate: Date,
-    completedDate: Date
+  id: string
+  name: string
+  isCompleted: boolean
+  createdDate: Date
+  completedDate: Date
 }
 
 const sampleTask: Task = {
-    id: '394dsf',
-    name: 'Sample Task',
-    isCompleted: false,
-    createdDate: new Date(),
-    completedDate: new Date()
+  id: '394dsf',
+  name: 'Sample Task',
+  isCompleted: false,
+  createdDate: new Date(),
+  completedDate: new Date(),
 }
 
 // export default async function handler(req: Request, res: Response) {
@@ -24,11 +24,11 @@ const sampleTask: Task = {
 // }
 
 export const GET = async () => {
-  return Response.json(sampleTask, { status: 200 });
-};
+  return Response.json(sampleTask, { status: 200 })
+}
 
-export async function POST(req: Request, res: Response){
-    const data = await res.json()
-    console.log(data)
-    return Response.json(data)
+export async function POST(req: Request, res: Response) {
+  const data = await res.json()
+  console.log(data)
+  return Response.json(data)
 }
