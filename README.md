@@ -1,37 +1,48 @@
-This is a base Copilot Custom app built using [Next.js](https://nextjs.org/) and project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# README for Custom App Base
 
-## Getting Started
+This repository is a starting point for [Copilot Apps](https://www.copilot.com/apps). It is built using using [Next.js](https://nextjs.org/) and was bootstrapped with [create-next-app](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
+### Benefits
+
+Copilot Apps can be embedded in your internal dashboard and client portal and they can use our REST API to fetch information and perform actions, extending the Copilot production with custom functionality to meet a variety of needs.
+
+### Prerequisites
+
+In order to build a Copilot custom app you’ll need a knowledge of modern web development. Here are some of the tools you’ll encounter in this repository:
+
+- Node.JS
+- React
+- Next.JS
+- Yarn (NPM, PNPM, Bun or any other Node.JS package manager are also possible, but we use Yarn)
+
+### Getting Started
 
 The easiest way to get started is to fork this repo. Once forked, you will need to deploy the app and add it to Copilot.
 
-### Deploying
+**Deploying and Configuring App**
 
-The easiest way to deploy this custom app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+The easiest way to deploy this custom app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
 - Create a new project in your Vercel account. Note: create an account if you don't have one using github to automatically import repos.
 - Select the forked repo in Import Git Repository
-- In environment variables add COPILOT_API_KEY. You can find your API key in Copilot under Settings > API. Note: You will need to be an admin to create an API Key.
+- In environment variables add COPILOT_API_KEY. Your API key will be generated after you [add your app in the Copilot dashboard](https://dashboard.copilot.com/app-setup/setup?moduleType=extension&moduleId=new&preset=custom&appId=). You can submit 3 different URLs for your app: an internal URL for [internal users](https://docs.copilot.com/reference/internal-users), a client URL for [clients](https://docs.copilot.com/reference/clients), and a webhook URL that allows your app to subscribe to various [webhook events](https://docs.copilot.com/reference/webhooks-events). These values can all be edited after you create your app, so you can start with a simple config and add to it later.
 
-### Connecting with Copilot
+### **Developing App**
 
-Once your app is deployed you will get a url. E.g. custom-app-fork-neil.vercel.app. Using this url you can [add a custom app](https://www.copilot.com/guide/other-apps#don't-see-your-app-h3) in Copilot.
+All you need to do to get started developing is clone your forked app locally and run a few commands.
 
-You will now be able to use the app in Copilot.
+**Install dependencies**
 
-## Developing App
-
-Clone your forked app locally and run the development server.
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```tsx
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Run the app locally**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000/) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
