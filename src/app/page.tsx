@@ -1,8 +1,7 @@
 import { copilotApi } from 'copilot-node-sdk';
 import Image from 'next/image';
 import { need } from '@/utils/need';
-
-type SearchParams = { [key: string]: string | string[] | undefined };
+import { withTokenGate } from '@/utils/withTokenGate';
 
 const API_KEY = need<string>(process.env.COPILOT_API_KEY);
 
@@ -47,22 +46,7 @@ async function getContent(searchParams: SearchParams) {
   return data;
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
-  if (!searchParams.token && process.env.COPILOT_ENV !== 'local') {
-    return (
-      <main className="flex flex-col min-h-screen items-center justify-center p-24">
-        <h1 className="text-8xl font-semibold text-center">401</h1>
-        <p className="text-2xl font-semibold text-center">
-          Please provide a token to access the content.
-        </p>
-      </main>
-    );
-  }
-
+async function Page({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
   console.log({ data });
   return (
@@ -183,3 +167,5 @@ export default async function Page({
     </main>
   );
 }
+
+export default withTokenGate(Page);

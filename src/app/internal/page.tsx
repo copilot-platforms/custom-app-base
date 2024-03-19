@@ -1,6 +1,7 @@
 import { copilotApi } from 'copilot-node-sdk';
 import Image from 'next/image';
 import { need } from '@/utils/need';
+import { withTokenGate } from '@/utils/withTokenGate';
 
 type SearchParams = { [key: string]: string | string[] | undefined };
 
@@ -51,11 +52,7 @@ async function getContent(searchParams: SearchParams) {
   return data;
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
+async function Page({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -170,3 +167,5 @@ export default async function Page({
     </main>
   );
 }
+
+export default withTokenGate(Page);
