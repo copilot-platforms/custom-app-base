@@ -1,6 +1,6 @@
-import { copilotApi } from "copilot-node-sdk";
-import Image from "next/image";
-import { need } from "@/utils/need";
+import { copilotApi } from 'copilot-node-sdk';
+import Image from 'next/image';
+import { need } from '@/utils/need';
 
 type SearchParams = { [key: string]: string | string[] | undefined };
 
@@ -13,36 +13,36 @@ const API_KEY = need<string>(process.env.COPILOT_API_KEY);
  */
 async function getContent(searchParams: SearchParams) {
   if (!process.env.COPILOT_API_KEY) {
-    throw new Error("Missing COPILOT_API_KEY");
+    throw new Error('Missing COPILOT_API_KEY');
   }
 
   const copilot = copilotApi({
     apiKey: API_KEY,
     token:
-      "token" in searchParams && typeof searchParams.token === "string"
+      'token' in searchParams && typeof searchParams.token === 'string'
         ? searchParams.token
         : undefined,
   });
   const data: {
-    workspace: Awaited<ReturnType<typeof copilot.getWorkspaceInfo>>;
-    client?: Awaited<ReturnType<typeof copilot.retrieveAClient>>;
-    company?: Awaited<ReturnType<typeof copilot.retrieveACompany>>;
-    internalUser?: Awaited<ReturnType<typeof copilot.retrieveAnInternalUser>>;
+    workspace: Awaited<ReturnType<typeof copilot.retrieveWorkspace>>;
+    client?: Awaited<ReturnType<typeof copilot.retrieveClient>>;
+    company?: Awaited<ReturnType<typeof copilot.retrieveCompany>>;
+    internalUser?: Awaited<ReturnType<typeof copilot.retrieveInternalUser>>;
   } = {
-    workspace: await copilot.getWorkspaceInfo(),
+    workspace: await copilot.retrieveWorkspace(),
   };
   const tokenPayload = await copilot.getTokenPayload?.();
 
   if (tokenPayload?.clientId) {
-    data.client = await copilot.retrieveAClient({ id: tokenPayload.clientId });
+    data.client = await copilot.retrieveClient({ id: tokenPayload.clientId });
   }
   if (tokenPayload?.companyId) {
-    data.client = await copilot.retrieveACompany({
+    data.client = await copilot.retrieveCompany({
       id: tokenPayload.companyId,
     });
   }
   if (tokenPayload?.internalUserId) {
-    data.client = await copilot.retrieveAnInternalUser({
+    data.client = await copilot.retrieveInternalUser({
       id: tokenPayload.internalUserId,
     });
   }
@@ -74,7 +74,7 @@ export default async function Page({
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{" "}
+            By{' '}
             <Image
               src="/copilot_icon.png"
               alt="Copilot Icon"
@@ -106,7 +106,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
+            Docs{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -123,7 +123,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
+            Learn{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -140,7 +140,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Explore{" "}
+            Explore{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -157,7 +157,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
+            Deploy{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
