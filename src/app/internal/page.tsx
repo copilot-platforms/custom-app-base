@@ -1,9 +1,7 @@
 import { copilotApi } from 'copilot-node-sdk';
 import Image from 'next/image';
 import { need } from '@/utils/need';
-import { withTokenGate } from '@/utils/withTokenGate';
-
-type SearchParams = { [key: string]: string | string[] | undefined };
+import { TokenGate } from '@/components/TokenGate';
 
 const API_KEY = need<string>(process.env.COPILOT_API_KEY);
 
@@ -13,10 +11,6 @@ const API_KEY = need<string>(process.env.COPILOT_API_KEY);
  * passed to your app in the searchParams.
  */
 async function getContent(searchParams: SearchParams) {
-  if (!process.env.COPILOT_API_KEY) {
-    throw new Error('Missing COPILOT_API_KEY');
-  }
-
   const copilot = copilotApi({
     apiKey: API_KEY,
     token:
@@ -48,12 +42,15 @@ async function getContent(searchParams: SearchParams) {
     });
   }
 
-  // TODO add data.workspace here.
   return data;
 }
 
-async function Page({ searchParams }: { searchParams: SearchParams }) {
+async function Content({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
+  // Console log the data to see what's available
+  // You can see these logs in the terminal where
+  // you run `yarn dev`
+  console.log({ data });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -168,4 +165,10 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   );
 }
 
-export default withTokenGate(Page);
+export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  return (
+    <TokenGate searchParams={searchParams}>
+      <Content searchParams={searchParams} />
+    </TokenGate>
+  );
+}

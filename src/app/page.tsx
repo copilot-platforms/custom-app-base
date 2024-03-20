@@ -1,7 +1,7 @@
 import { copilotApi } from 'copilot-node-sdk';
 import Image from 'next/image';
 import { need } from '@/utils/need';
-import { withTokenGate } from '@/utils/withTokenGate';
+import { TokenGate } from '@/components/TokenGate';
 
 const API_KEY = need<string>(process.env.COPILOT_API_KEY);
 
@@ -46,8 +46,11 @@ async function getContent(searchParams: SearchParams) {
   return data;
 }
 
-async function Page({ searchParams }: { searchParams: SearchParams }) {
+async function Content({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
+  // Console log the data to see what's available
+  // You can see these logs in the terminal where
+  // you run `yarn dev`
   console.log({ data });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -168,4 +171,10 @@ async function Page({ searchParams }: { searchParams: SearchParams }) {
   );
 }
 
-export default withTokenGate(Page);
+export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  return (
+    <TokenGate searchParams={searchParams}>
+      <Content searchParams={searchParams} />
+    </TokenGate>
+  );
+}
