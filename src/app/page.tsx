@@ -1,57 +1,57 @@
-import { copilotApi } from "copilot-node-sdk";
-import Image from "next/image";
-import { need } from "../utils/need";
-
-type SearchParams = { [key: string]: string | string[] | undefined };
+import { copilotApi } from 'copilot-node-sdk';
+import Image from 'next/image';
+import { need } from '@/utils/need';
+import { TokenGate } from '@/components/TokenGate';
 
 const API_KEY = need<string>(process.env.COPILOT_API_KEY);
 
+/**
+ * A helper function that instantiates the Copilot SDK and fetches data
+ * from the Copilot API based on the contents of the token that gets
+ * passed to your app in the searchParams.
+ */
 async function getContent(searchParams: SearchParams) {
-  if (!process.env.COPILOT_API_KEY) {
-    throw new Error("Missing COPILOT_API_KEY");
-  }
-
   const copilot = copilotApi({
     apiKey: API_KEY,
     token:
-      "token" in searchParams && typeof searchParams.token === "string"
+      'token' in searchParams && typeof searchParams.token === 'string'
         ? searchParams.token
         : undefined,
   });
+
   const data: {
-    workspace: Awaited<ReturnType<typeof copilot.getWorkspaceInfo>>;
-    client?: Awaited<ReturnType<typeof copilot.retrieveAClient>>;
-    company?: Awaited<ReturnType<typeof copilot.retrieveACompany>>;
-    internalUser?: Awaited<ReturnType<typeof copilot.retrieveAnInternalUser>>;
+    workspace: Awaited<ReturnType<typeof copilot.retrieveWorkspace>>;
+    client?: Awaited<ReturnType<typeof copilot.retrieveClient>>;
+    company?: Awaited<ReturnType<typeof copilot.retrieveCompany>>;
+    internalUser?: Awaited<ReturnType<typeof copilot.retrieveInternalUser>>;
   } = {
-    workspace: await copilot.getWorkspaceInfo(),
+    workspace: await copilot.retrieveWorkspace(),
   };
   const tokenPayload = await copilot.getTokenPayload?.();
 
   if (tokenPayload?.clientId) {
-    data.client = await copilot.retrieveAClient({ id: tokenPayload.clientId });
+    data.client = await copilot.retrieveClient({ id: tokenPayload.clientId });
   }
   if (tokenPayload?.companyId) {
-    data.client = await copilot.retrieveACompany({
+    data.company = await copilot.retrieveCompany({
       id: tokenPayload.companyId,
     });
   }
   if (tokenPayload?.internalUserId) {
-    data.client = await copilot.retrieveAnInternalUser({
+    data.internalUser = await copilot.retrieveInternalUser({
       id: tokenPayload.internalUserId,
     });
   }
 
-  // TODO add data.workspace here.
   return data;
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
+async function Content({ searchParams }: { searchParams: SearchParams }) {
   const data = await getContent(searchParams);
+  // Console log the data to see what's available
+  // You can see these logs in the terminal where
+  // you run `yarn dev`
+  console.log({ data });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -69,7 +69,7 @@ export default async function Page({
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{" "}
+            By{' '}
             <Image
               src="/copilot_icon.png"
               alt="Copilot Icon"
@@ -93,7 +93,7 @@ export default async function Page({
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
         <a
           href="https://docs.copilot.com/reference/introduction"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -101,7 +101,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
+            Docs{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -112,19 +112,19 @@ export default async function Page({
         </a>
 
         <a
-          href="https://docs.copilot.com/page/custom-apps"
+          href="https://docs.copilot.com/docs/custom-apps-developing-your-first-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
+            Learn{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn how to integrate a custom app into the Copilot platform!
+            Learn how to integrate a custom app into the Copilot platform.
           </p>
         </a>
 
@@ -135,7 +135,7 @@ export default async function Page({
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Explore{" "}
+            Explore{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -144,24 +144,15 @@ export default async function Page({
             Explore the ideas for custom apps.
           </p>
         </a>
-
-        <a
-          href="https://github.com/copilot-platforms/custom-app-base"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Read the details in the repo docs to learn how to deploy.
-          </p>
-        </a>
       </div>
     </main>
+  );
+}
+
+export default function Page({ searchParams }: { searchParams: SearchParams }) {
+  return (
+    <TokenGate searchParams={searchParams}>
+      <Content searchParams={searchParams} />
+    </TokenGate>
   );
 }
