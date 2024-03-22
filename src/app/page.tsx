@@ -62,7 +62,7 @@ console.log({data});
     <div className="pb-6 border-b border-slate-100">
       <div className="flex flex-wrap items-center justify-between -m-2">
         <div className="w-full md:w-auto p-2">
-          <h2 className="text-slate-900 text-lg font-semibold">Personal info</h2>
+          <h2 className="text-slate-900 text-lg font-semibold">Personal info </h2>
           <p className="text-xs text-indigo-700 font-medium">Edit your information here!</p>
         </div>
         <div className="w-full md:w-auto p-2">
