@@ -84,7 +84,7 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
         </a>
 
         <a
-          href="https://www.notion.so/copilotplatforms/Sept-2023-Engaging-Agencies-for-custom-apps-8eb2f8dbdfb5422ca17068e0628c6fb0?pvs=4"
+          href="https://www.copilot.com/experts"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
