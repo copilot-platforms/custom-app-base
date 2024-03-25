@@ -7,7 +7,7 @@ export function TokenGate({
 }) {
   if (!searchParams.token && process.env.COPILOT_ENV !== 'local') {
     throw new Error(
-      'This app requires a token to be passed in the URL. Please check the URL and try again.',
+      'Session Token is required, guide available at: https://docs.copilot.com/docs/custom-apps-setting-up-the-sdk#session-tokens',
     );
   }
 

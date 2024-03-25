@@ -1,5 +1,7 @@
 'use client';
 
+import Linkify from 'react-linkify';
+
 export default function Error({
   error,
   reset,
@@ -8,12 +10,26 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          {error.message}
+    <main className="flex flex-col min-h-screen items-center justify-center p-24">
+      <div className="flex flex-col max-w-84 bg-white p-8 border-red-600 border">
+        <p className="mb-2 [&>a:hover]:underline [&>a]:block">
+          <Linkify
+            componentDecorator={(decoratedHref, decoratedText, key) => (
+              <a target="blank" href={decoratedHref} key={key}>
+                {decoratedText}
+              </a>
+            )}
+          >
+            {error.message}
+          </Linkify>
         </p>
-        <button onClick={() => reset()}>Try again</button>
+
+        <button
+          className="border border-stone-300 rounded py-[4.5px] px-[13px] self-start text-gray-800 shadow"
+          onClick={() => reset()}
+        >
+          Try again
+        </button>
       </div>
     </main>
   );
