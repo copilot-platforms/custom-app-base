@@ -1,5 +1,5 @@
-import { copilotApi } from "copilot-node-sdk";
-import { need } from "@/utils/need";
+import { copilotApi } from 'copilot-node-sdk';
+import { need } from '@/utils/need';
 
 /**
  * A helper function that instantiates the Copilot SDK and fetches data

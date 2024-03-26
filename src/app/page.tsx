@@ -96,7 +96,8 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            See our experts directory, and join to receive work opportunities building on top of Copilot.
+            See our experts directory, and join to receive work opportunities
+            building on top of Copilot.
           </p>
         </a>
       </div>

@@ -11,7 +11,7 @@ export default function Error({
 }) {
   return (
     <main className="flex flex-col min-h-screen items-center justify-center p-24">
-      <div className="flex flex-col max-w-84 bg-white p-8 border-red-600 border">
+      <div className="flex flex-col max-w-84 p-8 border-red-600 border">
         <p className="mb-2 [&>a:hover]:underline [&>a]:block">
           <Linkify
             componentDecorator={(decoratedHref, decoratedText, key) => (
@@ -25,7 +25,7 @@ export default function Error({
         </p>
 
         <button
-          className="border border-stone-300 rounded py-[4.5px] px-[13px] self-start text-gray-800 shadow"
+          className="border border-stone-300 rounded py-[4.5px] px-[13px] self-start shadow"
           onClick={() => reset()}
         >
           Try again

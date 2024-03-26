@@ -1,7 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
- 
+import { NextRequest, NextResponse } from 'next/server';
+
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
+  if (process.env.NODE_ENV === 'development') {
+    return NextResponse.next();
+  }
+
+  const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   // If you have a custom domain add it below to the
   // space separated frame-ancestors list.
   const cspHeader = `
@@ -16,29 +20,29 @@ export function middleware(request: NextRequest) {
     frame-ancestors https://dashboard.copilot.com/ https://*.copilot.app/;
     block-all-mixed-content;
     upgrade-insecure-requests;
-`
+`;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, ' ')
-    .trim()
- 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
- 
+    .trim();
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+
   requestHeaders.set(
     'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
- 
+    contentSecurityPolicyHeaderValue,
+  );
+
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
-  })
+  });
   response.headers.set(
     'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
- 
-  return response
+    contentSecurityPolicyHeaderValue,
+  );
+
+  return response;
 }
