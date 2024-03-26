@@ -84,19 +84,27 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
         </a>
 
         <a
+<<<<<<< Updated upstream
           href="https://www.copilot.com/experts"
+=======
+          href="https://www.copilot.com/experts-program"
+>>>>>>> Stashed changes
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Explore{' '}
+            Need help?{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+<<<<<<< Updated upstream
             See our experts directory, and join to receive work opportunities building on top of Copilot.
+=======
+            Find (or become) an Expert.
+>>>>>>> Stashed changes
           </p>
         </a>
       </div>
