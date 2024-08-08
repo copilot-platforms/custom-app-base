@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
 import { getSession } from '@/utils/session';
-import { unstable_noStore as noStore } from "next/cache";
+
 /**
  * The revalidate property determine's the cache TTL for this page and
  * all fetches that occur within it. This value is in seconds.
@@ -9,7 +9,7 @@ import { unstable_noStore as noStore } from "next/cache";
 export const revalidate = 180;
 
 async function Content({ searchParams }: { searchParams: SearchParams }) {
- noStore();
+
   const data = await getSession(searchParams);
   // Console log the data to see what's available
   // You can see these logs in the terminal where

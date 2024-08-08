@@ -20,7 +20,7 @@ export async function getSession(searchParams: SearchParams) {
 
 
 
-
+  console.log("api = "+apiKey)
   const copilot = copilotApi({
     apiKey: apiKey,
     token:
