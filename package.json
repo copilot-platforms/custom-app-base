@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "copilot-node-sdk": "^3.0.0",
+    "copilot-node-sdk": "^3.2.0",
     "next": "^14.1.0",
     "prettier-plugin-tailwindcss": "^0.5.12",
     "react": "^18.2.0",
