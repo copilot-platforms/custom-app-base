@@ -17,10 +17,8 @@ export async function getSession(searchParams: SearchParams) {
     process.env.COPILOT_API_KEY,
     'COPILOT_API_KEY is required, guide available at: https://docs.copilot.com/docs/custom-apps-setting-up-your-first-app#step-2-register-your-app-and-get-an-api-key',
   );
-throw new Error(apiKey);
-   if (!apiKey) {
-        throw new Error("Missing environment variable for api key");
-    }
+
+
 
 
   const copilot = copilotApi({
@@ -54,6 +52,12 @@ throw new Error(apiKey);
       id: tokenPayload.internalUserId,
     });
   }
+
+   if (!apiKey) {
+        throw new Error("Missing environment variable for api key");
+    }else{
+      
+    }
 
   return data;
 }
