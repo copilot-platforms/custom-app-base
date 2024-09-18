@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const EmbeddedDevOrchestrator: React.FC = () => {
   const getCookie = (name: string): string | null => {
@@ -18,7 +18,12 @@ const EmbeddedDevOrchestrator: React.FC = () => {
     const ngrokUrl = getCookie('ngrokUrl');
     console.log({ ngrokUrl });
   }, []);
-  return null;
+
+  return (
+    <div>
+      <button>I am a button</button>
+    </div>
+  );
 };
 
 export default EmbeddedDevOrchestrator;
