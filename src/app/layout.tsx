@@ -1,3 +1,4 @@
+import EmbeddedDevOrchestrator from '@/components/EmbeddedDevOrchestrator';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -14,9 +15,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log({ COPILOT_ENV: process.env.COPILOT_ENV });
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+
+        {process.env.COPILOT_ENV === 'local' && <EmbeddedDevOrchestrator />}
+      </body>
     </html>
   );
 }
