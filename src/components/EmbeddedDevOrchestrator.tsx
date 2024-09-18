@@ -21,7 +21,7 @@ const EmbeddedDevOrchestrator: React.FC = () => {
 
   return (
     <div>
-      <button>I am a button</button>
+      <button className="border-2 border-black rounded-md px-4 py-2 fixed bottom-4 right-4">I am a button</button>
     </div>
   );
 };
