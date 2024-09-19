@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
 
-        {process.env.COPILOT_ENV === 'local' && <EmbeddedDevOrchestrator />}
+         <EmbeddedDevOrchestrator />
       </body>
     </html>
   );

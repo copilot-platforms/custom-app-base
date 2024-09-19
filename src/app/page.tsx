@@ -9,6 +9,14 @@ import { getSession } from '@/utils/session';
 export const revalidate = 180;
 
 async function Content({ searchParams }: { searchParams: SearchParams }) {
+<<<<<<< HEAD
+=======
+  // const data = await getSession(searchParams);
+  // Console log the data to see what's available
+  // You can see these logs in the terminal where
+  // you run `yarn dev`
+  // console.log({ data });
+>>>>>>> 2ea609c (xframe stuff and remove postMessage add link on button)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
