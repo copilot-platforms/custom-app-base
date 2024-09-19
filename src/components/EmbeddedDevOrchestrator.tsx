@@ -15,7 +15,7 @@ const EmbeddedDevOrchestrator: React.FC = () => {
   };
 
   const [ngrokUrl, setNgrokUrl] = useState('');
-  const [showLink, setShowLink] = useState(false);  
+  const [showLink, setShowLink] = useState(false);
 
   useEffect(() => {
     const url = getCookie('ngrokUrl');
@@ -24,9 +24,9 @@ const EmbeddedDevOrchestrator: React.FC = () => {
     }
 
     if (window.location !== window.parent.location) {
-      setShowLink(false); 
+      setShowLink(false);
     } else {
-      setShowLink(true); 
+      setShowLink(true);
     }
   }, []);
 

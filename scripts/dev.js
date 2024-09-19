@@ -21,7 +21,7 @@ app.prepare().then(async () => {
   console.log('> Opening an ngrok tunnel to the server...');
 
   const listener = await ngrok.forward({
-    authtoken: '2mILgbDjRPvTgEnhpyUBfGkIAbz_2PW5wYbQEtFDYdKt7TEDS',
+    authtoken: '2mFZeCwcrCQY26sdkBVbx1rc0Yc_5EmNLPLz7zqNpZWhM84Ba',
     addr: 3009,
   });
 

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
-import { getSession } from '@/utils/session';
 import { useEffect } from 'react';
 
 /**
@@ -11,10 +10,10 @@ import { useEffect } from 'react';
  */
 export const revalidate = 180;
 
-function Content({ searchParams }: { searchParams: SearchParams }) {
+function Content() {
   const callbacks = {
     one: () => {
-      alert('Button clicked!');
+      alert('callback fired inside the iframe!');
     },
   } as const;
 
@@ -27,21 +26,22 @@ function Content({ searchParams }: { searchParams: SearchParams }) {
       '*',
     );
 
-    // window.parent.postMessage(
-    //   {
-    //     type: 'header.primaryCta',
-    //     label: 'Click this Button!',
-    //     onClick: 'one',
-    //   },
-    //   '*',
-    // );
+    window.parent.postMessage(
+      {
+        type: 'header.primaryCta',
+        label: 'Click this Button!',
+        onClick: 'one',
+      },
+      '*',
+    );
 
 
     const handleMessage = (event: MessageEvent) => {
+      console.log('message received in iframe:', event.data);
       if (
-        event.data.type === 'button.click' &&
-        typeof event.data.onClick === 'string' &&
-        event.data.onClick === 'one'
+        event.data.type === 'header.primaryCta.onClick' &&
+        typeof event.data.id === 'string' &&
+        event.data.id === 'one'
       ) {
         callbacks.one();
       }
@@ -150,7 +150,7 @@ function Content({ searchParams }: { searchParams: SearchParams }) {
 export default function Page({ searchParams }: { searchParams: SearchParams }) {
   return (
     <TokenGate searchParams={searchParams}>
-      <Content searchParams={searchParams} />
+      <Content />
     </TokenGate>
   );
 }
