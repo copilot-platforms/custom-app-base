@@ -23,18 +23,18 @@ const EmbeddedDevOrchestrator: React.FC = () => {
     }
   }, []);
 
-  function iniFrame() {
-    if (window.location !== window.parent.location) {
-        // The page is in an iFrame
-        console.log('im in a frame')
-    }
-    else {
-        // The page is not in an iFrame
-        console.log("The page is not in an iFrame");
-    }
-}
+//   function iniFrame() {
+//     if (window.location !== window.parent.location) {
+//         // The page is in an iFrame
+//         console.log('im in a frame')
+//     }
+//     else {
+//         // The page is not in an iFrame
+//         console.log("The page is not in an iFrame");
+//     }
+// }
 
-iniFrame()
+// iniFrame()
 
 
   return (
