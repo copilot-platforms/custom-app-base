@@ -23,30 +23,32 @@ const EmbeddedDevOrchestrator: React.FC = () => {
     }
   }, []);
 
-//   function iniFrame() {
-//     if (window.location !== window.parent.location) {
-//         // The page is in an iFrame
-//         console.log('im in a frame')
-//     }
-//     else {
-//         // The page is not in an iFrame
-//         console.log("The page is not in an iFrame");
-//     }
-// }
+  function iniFrame() {
+    if (window.location !== window.parent.location) {
+        // The page is in an iFrame
+        console.log('im in a frame')
+        return (<a
+          href={`http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
+            ngrokUrl,
+          )}`}
+          className="border-2 border-black rounded-md px-4 py-2 fixed bottom-4 right-4"
+        >
+          Dev Mode
+        </a>)
+    }
+    else {
+        // The page is not in an iFrame
+        console.log("The page is not in an iFrame");
+        return null
+    }
+}
 
-// iniFrame()
+iniFrame()
 
 
   return (
     <div>
-      <a
-        href={`http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
-          ngrokUrl,
-        )}`}
-        className="border-2 border-black rounded-md px-4 py-2 fixed bottom-4 right-4"
-      >
-        Dev Mode
-      </a>
+      {iniFrame()}
     </div>
   );
 };
