@@ -24,6 +24,7 @@ const EmbeddedDevOrchestrator: React.FC = () => {
   }, []);
 
   function iniFrame() {
+    if (typeof window !== 'undefined') {
     if (window.location !== window.parent.location) {
         // The page is in an iFrame
         console.log('im in a frame')
@@ -41,6 +42,7 @@ const EmbeddedDevOrchestrator: React.FC = () => {
         console.log("The page is not in an iFrame");
         return null
     }
+  }
 }
 
 iniFrame()
