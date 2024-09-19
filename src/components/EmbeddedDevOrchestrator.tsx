@@ -15,45 +15,35 @@ const EmbeddedDevOrchestrator: React.FC = () => {
   };
 
   const [ngrokUrl, setNgrokUrl] = useState('');
+  const [showLink, setShowLink] = useState(false);  
 
   useEffect(() => {
     const url = getCookie('ngrokUrl');
     if (url) {
       setNgrokUrl(url);
     }
+
+    if (window.location !== window.parent.location) {
+      setShowLink(false); 
+    } else {
+      setShowLink(true); 
+    }
   }, []);
 
-  function iniFrame() {
-    if (typeof window !== 'undefined') {
-      if (window.location !== window.parent.location) {
-        // The page is in an iFrame
-        console.log('im in a frame');
-        return (
-          <a
-            href={`http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
-              ngrokUrl,
-            )}`}
-            className="border-2 border-black rounded-md px-4 py-2 fixed bottom-4 right-4"
-          >
-            Dev Mode
-          </a>
-        );
-      } else {
-        // The page is not in an iFrame!
-        console.log('The page is not in an iFrame');
-        return null;
-      }
-    }
-  }
-
-  iniFrame();
-
-  return <div>{iniFrame()}</div>;
+  return (
+    <div>
+      {showLink && (
+        <a
+          href={`http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
+            ngrokUrl,
+          )}`}
+          className="border-2 border-black rounded-md px-4 py-2 fixed bottom-4 right-4"
+        >
+          Dev Mode
+        </a>
+      )}
+    </div>
+  );
 };
 
 export default EmbeddedDevOrchestrator;
-
-// check if page is in iframe, hide button, otherwise show
-// select a client and preview as that client
-// production app
-// show off token contents
