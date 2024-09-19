@@ -36,6 +36,7 @@ function Content({ searchParams }: { searchParams: SearchParams }) {
     //   '*',
     // );
 
+
     const handleMessage = (event: MessageEvent) => {
       if (
         event.data.type === 'button.click' &&

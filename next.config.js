@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    COPILOT_ENV: process.env.COPILOT_ENV,
+  },
   headers: async () => {
     return [
       {
