@@ -37,7 +37,7 @@ const EmbeddedDevOrchestrator: React.FC = () => {
         </a>)
     }
     else {
-        // The page is not in an iFrame
+        // The page is not in an iFrame!
         console.log("The page is not in an iFrame");
         return null
     }
