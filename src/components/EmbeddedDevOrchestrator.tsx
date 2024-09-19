@@ -54,3 +54,9 @@ iniFrame()
 };
 
 export default EmbeddedDevOrchestrator;
+
+
+// check if page is in iframe, hide button, otherwise show
+// select a client and preview as that client
+// production app
+// show off token contents
