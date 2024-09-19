@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
 import { getSession } from '@/utils/session';
+import { useEffect } from 'react';
 
 /**
  * The revalidate property determine's the cache TTL for this page and
@@ -8,12 +11,52 @@ import { getSession } from '@/utils/session';
  */
 export const revalidate = 180;
 
-async function Content({ searchParams }: { searchParams: SearchParams }) {
+function Content({ searchParams }: { searchParams: SearchParams }) {
+  const callbacks = {
+    one: () => {
+      alert('Button clicked!');
+    },
+  } as const;
+
+  useEffect(() => {
+    window.parent.postMessage(
+      {
+        type: 'header.title',
+        title: 'Hello, App Bridge!',
+      },
+      '*',
+    );
+
+    // window.parent.postMessage(
+    //   {
+    //     type: 'header.primaryCta',
+    //     label: 'Click this Button!',
+    //     onClick: 'one',
+    //   },
+    //   '*',
+    // );
+
+    const handleMessage = (event: MessageEvent) => {
+      if (
+        event.data.type === 'button.click' &&
+        typeof event.data.onClick === 'string' &&
+        event.data.onClick === 'one'
+      ) {
+        callbacks.one();
+      }
+    };
+
+    addEventListener('message', handleMessage);
+
+    return () => {
+      removeEventListener('message', handleMessage);
+    };
+  }, []);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 pb-6 pt-8 dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Welcome to the custom app&nbsp;
+          Welcome to the custom app
         </p>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
