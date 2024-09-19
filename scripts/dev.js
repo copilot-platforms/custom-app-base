@@ -3,18 +3,17 @@ const { parse } = require('url');
 const next = require('next');
 const ngrok = require('@ngrok/ngrok');
 
-const port = parseInt(process.env.PORT || '3000', 10);
+const port = parseInt(process.env.PORT || '3009', 10);
 const app = next({ dev: true });
 const handle = app.getRequestHandler();
 
 process.env.COPILOT_ENV = 'local';
 
 app.prepare().then(async () => {
-  let ngrokUrl;
-
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true);
     res.setHeader('Set-Cookie', `ngrokUrl=${ngrokUrl}`);
+    res.setHeader('X-Frame-Options', ``);
     handle(req, res, parsedUrl);
   }).listen(port);
 
@@ -23,11 +22,22 @@ app.prepare().then(async () => {
 
   const listener = await ngrok.forward({
     authtoken: '2mFZeCwcrCQY26sdkBVbx1rc0Yc_5EmNLPLz7zqNpZWhM84Ba',
-    addr: 3000,
+    addr: 3009,
   });
 
   console.log(`> Tunnel opened at ${listener.url()}`);
-  ngrokUrl = listener.url();
+  const ngrokUrl = listener.url();
+
+  const { default: open, apps } = await import('open');
+  const url = `http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
+    ngrokUrl,
+  )}`;
+
+  console.log(`> Opening browser at ${url}`);
+
+  open(url, {
+    app: apps.browser,
+  });
 });
 
 process.stdin.resume();
