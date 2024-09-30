@@ -300,6 +300,145 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ngrok/ngrok-android-arm-eabi@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-android-arm-eabi@npm:1.4.1"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-android-arm64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-android-arm64@npm:1.4.1"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-darwin-arm64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-darwin-arm64@npm:1.4.1"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-darwin-universal@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-darwin-universal@npm:1.4.1"
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-darwin-x64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-darwin-x64@npm:1.4.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-freebsd-x64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-freebsd-x64@npm:1.4.1"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-linux-arm-gnueabihf@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-linux-arm-gnueabihf@npm:1.4.1"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-linux-arm64-gnu@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-linux-arm64-gnu@npm:1.4.1"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-linux-arm64-musl@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-linux-arm64-musl@npm:1.4.1"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-linux-x64-gnu@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-linux-x64-gnu@npm:1.4.1"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-linux-x64-musl@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-linux-x64-musl@npm:1.4.1"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-win32-ia32-msvc@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-win32-ia32-msvc@npm:1.4.1"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok-win32-x64-msvc@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok-win32-x64-msvc@npm:1.4.1"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@ngrok/ngrok@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@ngrok/ngrok@npm:1.4.1"
+  dependencies:
+    "@ngrok/ngrok-android-arm-eabi": "npm:1.4.1"
+    "@ngrok/ngrok-android-arm64": "npm:1.4.1"
+    "@ngrok/ngrok-darwin-arm64": "npm:1.4.1"
+    "@ngrok/ngrok-darwin-universal": "npm:1.4.1"
+    "@ngrok/ngrok-darwin-x64": "npm:1.4.1"
+    "@ngrok/ngrok-freebsd-x64": "npm:1.4.1"
+    "@ngrok/ngrok-linux-arm-gnueabihf": "npm:1.4.1"
+    "@ngrok/ngrok-linux-arm64-gnu": "npm:1.4.1"
+    "@ngrok/ngrok-linux-arm64-musl": "npm:1.4.1"
+    "@ngrok/ngrok-linux-x64-gnu": "npm:1.4.1"
+    "@ngrok/ngrok-linux-x64-musl": "npm:1.4.1"
+    "@ngrok/ngrok-win32-ia32-msvc": "npm:1.4.1"
+    "@ngrok/ngrok-win32-x64-msvc": "npm:1.4.1"
+  dependenciesMeta:
+    "@ngrok/ngrok-android-arm-eabi":
+      optional: true
+    "@ngrok/ngrok-android-arm64":
+      optional: true
+    "@ngrok/ngrok-darwin-arm64":
+      optional: true
+    "@ngrok/ngrok-darwin-universal":
+      optional: true
+    "@ngrok/ngrok-darwin-x64":
+      optional: true
+    "@ngrok/ngrok-freebsd-x64":
+      optional: true
+    "@ngrok/ngrok-linux-arm-gnueabihf":
+      optional: true
+    "@ngrok/ngrok-linux-arm64-gnu":
+      optional: true
+    "@ngrok/ngrok-linux-arm64-musl":
+      optional: true
+    "@ngrok/ngrok-linux-x64-gnu":
+      optional: true
+    "@ngrok/ngrok-linux-x64-musl":
+      optional: true
+    "@ngrok/ngrok-win32-ia32-msvc":
+      optional: true
+    "@ngrok/ngrok-win32-x64-msvc":
+      optional: true
+  checksum: 10c0/411db368985b6566869645595ec6f381546a0d0f91f331cbef6c38cb789aca29a766cc58481b8030240d1b6cc741dcd596efe58e3226c0f71e80f583802b516e
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -857,6 +996,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bundle-name@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "bundle-name@npm:4.1.0"
+  dependencies:
+    run-applescript: "npm:^7.0.0"
+  checksum: 10c0/8e575981e79c2bcf14d8b1c027a3775c095d362d1382312f444a7c861b0e21513c0bd8db5bd2b16e50ba0709fa622d4eab6b53192d222120305e68359daece29
+  languageName: node
+  linkType: hard
+
 "busboy@npm:1.6.0":
   version: 1.6.0
   resolution: "busboy@npm:1.6.0"
@@ -1041,6 +1189,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-app-base@workspace:."
   dependencies:
+    "@ngrok/ngrok": "npm:^1.4.1"
     "@types/node": "npm:^20.11.1"
     "@types/react": "npm:^18.2.0"
     "@types/react-dom": "npm:^18.2.0"
@@ -1050,6 +1199,7 @@ __metadata:
     eslint: "npm:^8.57.0"
     eslint-config-next: "npm:^14.1.0"
     next: "npm:^14.1.0"
+    open: "npm:^10.1.0"
     postcss: "npm:^8.4.35"
     prettier-plugin-tailwindcss: "npm:^0.5.12"
     react: "npm:^18.2.0"
@@ -1129,6 +1279,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"default-browser-id@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "default-browser-id@npm:5.0.0"
+  checksum: 10c0/957fb886502594c8e645e812dfe93dba30ed82e8460d20ce39c53c5b0f3e2afb6ceaec2249083b90bdfbb4cb0f34e1f73fde3d68cac00becdbcfd894156b5ead
+  languageName: node
+  linkType: hard
+
+"default-browser@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "default-browser@npm:5.2.1"
+  dependencies:
+    bundle-name: "npm:^4.1.0"
+    default-browser-id: "npm:^5.0.0"
+  checksum: 10c0/73f17dc3c58026c55bb5538749597db31f9561c0193cd98604144b704a981c95a466f8ecc3c2db63d8bfd04fb0d426904834cfc91ae510c6aeb97e13c5167c4d
+  languageName: node
+  linkType: hard
+
 "define-data-property@npm:^1.0.1, define-data-property@npm:^1.1.4":
   version: 1.1.4
   resolution: "define-data-property@npm:1.1.4"
@@ -1137,6 +1304,13 @@ __metadata:
     es-errors: "npm:^1.3.0"
     gopd: "npm:^1.0.1"
   checksum: 10c0/dea0606d1483eb9db8d930d4eac62ca0fa16738b0b3e07046cddfacf7d8c868bbe13fa0cb263eb91c7d0d527960dc3f2f2471a69ed7816210307f6744fe62e37
+  languageName: node
+  linkType: hard
+
+"define-lazy-prop@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "define-lazy-prop@npm:3.0.0"
+  checksum: 10c0/5ab0b2bf3fa58b3a443140bbd4cd3db1f91b985cc8a246d330b9ac3fc0b6a325a6d82bddc0b055123d745b3f9931afeea74a5ec545439a1630b9c8512b0eeb49
   languageName: node
   linkType: hard
 
@@ -2236,6 +2410,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-docker@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "is-docker@npm:3.0.0"
+  bin:
+    is-docker: cli.js
+  checksum: 10c0/d2c4f8e6d3e34df75a5defd44991b6068afad4835bb783b902fa12d13ebdb8f41b2a199dcb0b5ed2cb78bfee9e4c0bbdb69c2d9646f4106464674d3e697a5856
+  languageName: node
+  linkType: hard
+
 "is-extglob@npm:^2.1.1":
   version: 2.1.1
   resolution: "is-extglob@npm:2.1.1"
@@ -2274,6 +2457,17 @@ __metadata:
   dependencies:
     is-extglob: "npm:^2.1.1"
   checksum: 10c0/17fb4014e22be3bbecea9b2e3a76e9e34ff645466be702f1693e8f1ee1adac84710d0be0bd9f967d6354036fd51ab7c2741d954d6e91dae6bb69714de92c197a
+  languageName: node
+  linkType: hard
+
+"is-inside-container@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "is-inside-container@npm:1.0.0"
+  dependencies:
+    is-docker: "npm:^3.0.0"
+  bin:
+    is-inside-container: cli.js
+  checksum: 10c0/a8efb0e84f6197e6ff5c64c52890fa9acb49b7b74fed4da7c95383965da6f0fa592b4dbd5e38a79f87fc108196937acdbcd758fcefc9b140e479b39ce1fcd1cd
   languageName: node
   linkType: hard
 
@@ -2397,6 +2591,15 @@ __metadata:
     call-bind: "npm:^1.0.7"
     get-intrinsic: "npm:^1.2.4"
   checksum: 10c0/8ad6141b6a400e7ce7c7442a13928c676d07b1f315ab77d9912920bf5f4170622f43126f111615788f26c3b1871158a6797c862233124507db0bcc33a9537d1a
+  languageName: node
+  linkType: hard
+
+"is-wsl@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "is-wsl@npm:3.1.0"
+  dependencies:
+    is-inside-container: "npm:^1.0.0"
+  checksum: 10c0/d3317c11995690a32c362100225e22ba793678fe8732660c6de511ae71a0ff05b06980cf21f98a6bf40d7be0e9e9506f859abe00a1118287d63e53d0a3d06947
   languageName: node
   linkType: hard
 
@@ -3125,6 +3328,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"open@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "open@npm:10.1.0"
+  dependencies:
+    default-browser: "npm:^5.2.1"
+    define-lazy-prop: "npm:^3.0.0"
+    is-inside-container: "npm:^1.0.0"
+    is-wsl: "npm:^3.1.0"
+  checksum: 10c0/c86d0b94503d5f735f674158d5c5d339c25ec2927562f00ee74590727292ed23e1b8d9336cb41ffa7e1fa4d3641d29b199b4ea37c78cb557d72b511743e90ebb
+  languageName: node
+  linkType: hard
+
 "optionator@npm:^0.9.3":
   version: 0.9.3
   resolution: "optionator@npm:0.9.3"
@@ -3628,6 +3843,13 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 10c0/9cb7757acb489bd83757ba1a274ab545eafd75598a9d817e0c3f8b164238dd90eba50d6b848bd4dcc5f3040912e882dc7ba71653e35af660d77b25c381d402e8
+  languageName: node
+  linkType: hard
+
+"run-applescript@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "run-applescript@npm:7.0.0"
+  checksum: 10c0/bd821bbf154b8e6c8ecffeaf0c33cebbb78eb2987476c3f6b420d67ab4c5301faa905dec99ded76ebb3a7042b4e440189ae6d85bbbd3fc6e8d493347ecda8bfe
   languageName: node
   linkType: hard
 
