@@ -29,7 +29,7 @@ app.prepare().then(async () => {
   const ngrokUrl = listener.url();
 
   const { default: open, apps } = await import('open');
-  const url = `http://localhost:3000/dev-mode?appId=02f36b50-91ce-4107-8f78-4eadc28eb38c&url=${encodeURIComponent(
+  const url = `http://localhost:3000/dev-mode?url=${encodeURIComponent(
     ngrokUrl,
   )}`;
 

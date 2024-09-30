@@ -20,6 +20,7 @@ export function middleware(request: NextRequest) {
     frame-ancestors https://dashboard.copilot.com/ https://*.copilot.app/;
     block-all-mixed-content;
     upgrade-insecure-requests;
+    ngrok-skip-browser-warning 1;
 `;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
@@ -29,20 +30,20 @@ export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
 
-  // requestHeaders.set(
-  //   'Content-Security-Policy',
-  //   contentSecurityPolicyHeaderValue,
-  // );
+  requestHeaders.set(
+    'Content-Security-Policy',
+    contentSecurityPolicyHeaderValue,
+  );
 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
     },
   });
-  // response.headers.set(
-  //   'Content-Security-Policy',
-  //   contentSecurityPolicyHeaderValue,
-  // );
+  response.headers.set(
+    'Content-Security-Policy',
+    contentSecurityPolicyHeaderValue,
+  );
 
   return response;
 }

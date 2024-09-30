@@ -1,8 +1,6 @@
-'use client';
-
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
-import { useEffect } from 'react';
+import { Container } from '@/components/Container';
 
 /**
  * The revalidate property determine's the cache TTL for this page and
@@ -11,55 +9,13 @@ import { useEffect } from 'react';
 export const revalidate = 180;
 
 function Content() {
-  const callbacks = {
-    one: () => {
-      alert('callback fired inside the iframe!');
-    },
-  } as const;
-
-  useEffect(() => {
-    window.parent.postMessage(
-      {
-        type: 'header.title',
-        title: 'Hello, App Bridge!',
-      },
-      '*',
-    );
-
-    window.parent.postMessage(
-      {
-        type: 'header.primaryCta',
-        label: 'Click this Button!',
-        onClick: 'one',
-      },
-      '*',
-    );
-
-
-    const handleMessage = (event: MessageEvent) => {
-      console.log('message received in iframe:', event.data);
-      if (
-        event.data.type === 'header.primaryCta.onClick' &&
-        typeof event.data.id === 'string' &&
-        event.data.id === 'one'
-      ) {
-        callbacks.one();
-      }
-    };
-
-    addEventListener('message', handleMessage);
-
-    return () => {
-      removeEventListener('message', handleMessage);
-    };
-  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 pb-6 pt-8 dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Welcome to the custom app
+    <Container>
+      <div className="w-full items-center justify-between font-mono text-sm lg:flex">
+        <p className="fixed left-0 top-0 flex w-full justify-center lg:static lg:w-auto">
+          Welcome to the custom app base
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center via-white dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
             href="https://copilot.com"
@@ -90,7 +46,7 @@ function Content() {
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
+      <div className="mb-32 grid text-center lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
         <a
           href="https://docs.copilot.com/reference"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -143,7 +99,7 @@ function Content() {
           </p>
         </a>
       </div>
-    </main>
+    </Container>
   );
 }
 
