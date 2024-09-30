@@ -1,13 +1,12 @@
+require('dotenv').config({ path: ['.env.local', '.env.personal'] });
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
 const ngrok = require('@ngrok/ngrok');
 
-const port = parseInt(process.env.PORT || '3009', 10);
+const port = parseInt(process.env.PORT ?? '3000', 10);
 const app = next({ dev: true });
 const handle = app.getRequestHandler();
-
-process.env.COPILOT_ENV = 'local';
 
 app.prepare().then(async () => {
   createServer((req, res) => {
@@ -21,8 +20,8 @@ app.prepare().then(async () => {
   console.log('> Opening an ngrok tunnel to the server...');
 
   const listener = await ngrok.forward({
-    authtoken: '2mFZeCwcrCQY26sdkBVbx1rc0Yc_5EmNLPLz7zqNpZWhM84Ba',
-    addr: 3009,
+    authtoken: process.env.NGROK_AUTH_TOKEN,
+    addr: port,
   });
 
   console.log(`> Tunnel opened at ${listener.url()}`);
