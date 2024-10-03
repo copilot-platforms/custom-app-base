@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
 import { Container } from '@/components/Container';
+import { Heading, Icon } from 'copilot-design-system';
+
+import 'copilot-design-system/dist/styles/main.css';
 
 /**
  * The revalidate property determine's the cache TTL for this page and
@@ -11,93 +14,82 @@ export const revalidate = 180;
 function Content() {
   return (
     <Container>
-      <div className="w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center lg:static lg:w-auto">
-          Welcome to the custom app base
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center via-white dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+      <header className="max-w-prose">
+        <div className="w-8 mb-4">
+          <Icon icon="AppSetup" />
+        </div>
+        <div className="mb-4">
+          <Heading variant="3xl">Welcome to the custom app base</Heading>
+        </div>
+        <Heading variant="lg" tag="p">
+          This is a demo of a custom app that integrates with Copilot. Our goal
+          is to enable developers to easily make apps that look and feel like a
+          part of our software, creating a seamless experience for your clients.
+        </Heading>
+      </header>
+
+      <div className="grid grid-cols-2 gap-8 mt-12 max-w-prose">
+        <div>
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://copilot.com"
+            href="https://docs.copilot.com/reference"
+            className="group"
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
-            <Image
-              src="/copilot_icon.png"
-              alt="Copilot Icon"
-              className="dark:invert"
-              width={24}
-              height={24}
-              priority
-            />
+            <div className="flex">
+              <Heading variant="2xl">Docs</Heading>
+              <Icon icon="ArrowNE" className="w-4 ml-1" />
+            </div>
           </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/copilot_logo.png"
-          alt="Copilot Logo"
-          width={200}
-          height={50}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
-        <a
-          href="https://docs.copilot.com/reference"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+          <p className={`m-0 mt-1 text-sm opacity-50`}>
             Find detailed information about the Copilot API.
           </p>
-        </a>
+        </div>
 
-        <a
-          href="https://docs.copilot.com/docs"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+        <div>
+          <a
+            href="https://docs.copilot.com/docs"
+            className="group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex">
+              <Heading variant="2xl">Learn</Heading>
+              <Icon icon="ArrowNE" className="w-4 ml-1" />
+            </div>
+          </a>
+          <p className={`m-0 mt-1 max-w-[30ch] text-sm opacity-50`}>
             Learn how to integrate a custom app into the Copilot platform.
           </p>
-        </a>
+        </div>
 
-        <a
-          href="https://www.copilot.com/experts"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Explore{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+        <div>
+          <a
+            href="https://www.copilot.com/experts"
+            className="group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="flex">
+              <Heading variant="2xl">Explore</Heading>
+              <Icon icon="ArrowNE" className="w-4 ml-1" />
+            </div>
+          </a>
+          <p className={`m-0 mt-1 max-w-[30ch] text-sm opacity-50`}>
             See our experts directory, and join to receive work opportunities
             building on top of Copilot.
           </p>
-        </a>
+        </div>
+
+        <div>
+          <a href="/bridge" className="group" rel="noopener noreferrer">
+            <Heading variant="2xl">App Bridge</Heading>
+          </a>
+          <p className={`m-0 mt-1 max-w-[30ch] text-sm opacity-50`}>
+            Learn how to integrate your app with Copilot with this live demo of
+            the App Bridge.
+          </p>
+        </div>
       </div>
     </Container>
   );

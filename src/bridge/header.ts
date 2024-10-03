@@ -65,6 +65,19 @@ export function useBreadcrumbs(breadcrumbs: ClickableProps[]) {
       removeEventListener('message', handleMessage);
     };
   }, [breadcrumbs, payload]);
+
+  useEffect(() => {
+    const handleUnload = () => {
+      window.parent.postMessage(
+        { type: 'header.breadcrumbs', items: [] },
+        'https://dashboard.copilot.com',
+      );
+    };
+    addEventListener('beforeunload', handleUnload);
+    return () => {
+      removeEventListener('beforeunload', handleUnload);
+    };
+  }, []);
 }
 
 export function usePrimaryCta(primaryCta: ClickableProps | null) {
@@ -96,4 +109,17 @@ export function usePrimaryCta(primaryCta: ClickableProps | null) {
       removeEventListener('message', handleMessage);
     };
   }, [primaryCta]);
+
+  useEffect(() => {
+    const handleUnload = () => {
+      window.parent.postMessage(
+        { type: 'header.primaryCta' },
+        'https://dashboard.copilot.com',
+      );
+    };
+    addEventListener('beforeunload', handleUnload);
+    return () => {
+      removeEventListener('beforeunload', handleUnload);
+    };
+  }, []);
 }
