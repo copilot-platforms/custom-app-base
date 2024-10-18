@@ -21,6 +21,9 @@ const nextConfig = {
       },
     ];
   },
+  env: {
+    COPILOT_API_KEY: process.env.COPILOT_API_KEY,
+  },
 };
 
 module.exports = nextConfig;
