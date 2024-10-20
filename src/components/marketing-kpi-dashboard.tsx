@@ -41,8 +41,12 @@ const generateDummyData = (days: number) => {
   return data
 }
 
+// Define a type for the metrics
+type Metric = 'openRate' | 'ctr' | 'conversionRate' | 'roi';
+
+
 // Suggested actions for each metric with detailed processes
-const suggestedActions = {
+const suggestedActions: Record<Metric, Array<{ title: string; process: string[] }>> = {
   openRate: [
     {
       title: "Improve email subject lines",
@@ -213,8 +217,18 @@ const suggestedActions = {
   ],
 }
 
+
+// Update the KPICard component props type
+type KPICardProps = {
+  title: string;
+  value: string;
+  description: string;
+  trend: number;
+  color: string;
+  metric: Metric;
+}
 // KPI Card component
-const KPICard = ({ title, value, description, trend, color, metric }: { title: string; value: string; description: string; trend: number; color: string; metric: string }) => (
+const KPICard = ({ title, value, description, trend, color, metric }: KPICardProps) => (
   <Card className="relative">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">{title}</CardTitle>
