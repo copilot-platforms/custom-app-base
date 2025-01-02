@@ -1,7 +1,7 @@
 'use client';
 
 import { useBreadcrumbs, usePrimaryCta } from '@/bridge/header';
-import { Heading, IconButton, SecondaryButton } from 'copilot-design-system';
+import { Body, IconButton, SecondaryButton } from 'copilot-design-system';
 import { useState } from 'react';
 import { CopyBlock, monoBlue } from 'react-code-blocks';
 
@@ -32,18 +32,21 @@ export function Demo() {
   );
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid lg:grid-cols-2 gap-8 mt-10">
       <div>
         <section className="grid grid-cols-12 items-baseline gap-4">
           <div className="col-span-3">
-            <Heading variant="base" tag="span">
+            <Body variant="base" tag="span" className="text-gray-500">
               Breadcrumbs:
-            </Heading>
+            </Body>
           </div>
 
           <div className="col-span-9 flex flex-row flex-wrap mb-4 gap-4">
             {breadcrumbValues.map((value, index) => (
-              <div className="bg-slate-100 flex flex-row rounded whitespace-nowrap">
+              <div
+                key={`breadcrumb-${value}-${index}`}
+                className="bg-slate-100 flex flex-row rounded whitespace-nowrap"
+              >
                 <input
                   className="text-sm bg-transparent px-4"
                   value={value}
@@ -64,7 +67,7 @@ export function Demo() {
                       return newValues;
                     });
                   }}
-                  icon="Cross"
+                  icon="Close"
                   label="Remove breadcrumb"
                 />
               </div>
@@ -86,9 +89,9 @@ export function Demo() {
 
         <section className="grid grid-cols-12 items-baseline gap-4">
           <div className="col-span-3">
-            <Heading variant="base" tag="span">
+            <Body variant="base" tag="span" className="text-gray-500">
               Primary Call to Action:
-            </Heading>
+            </Body>
           </div>
 
           <div className="col-span-9">
@@ -107,7 +110,7 @@ export function Demo() {
                     'use client';
                     setPrimaryCallToAction(null);
                   }}
-                  icon="Cross"
+                  icon="Close"
                   label="Remove primary call to action"
                 />
               </div>

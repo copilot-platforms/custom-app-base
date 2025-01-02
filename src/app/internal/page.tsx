@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { TokenGate } from '@/components/TokenGate';
-import { AppBridgeHeader } from '@/components/AppBridgeHeader';
 import { Container } from '@/components/Container';
 
 /**
@@ -12,7 +11,6 @@ export const revalidate = 180;
 async function Content() {
   return (
     <Container>
-      <AppBridgeHeader />
       <div className="w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center lg:static lg:w-auto">
           Internal Page&nbsp;

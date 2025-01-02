@@ -16,18 +16,18 @@ interface PrimaryCtaPayload {
   onClick: string;
 }
 
-interface ClickableProps {
+interface Breadcrumb {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const getBreadcrumbId = (idx: number) => `header.breadcrumbs.${idx}`;
 
-export function useBreadcrumbs(breadcrumbs: ClickableProps[]) {
+export function useBreadcrumbs(breadcrumbs: Breadcrumb[]) {
   const callbackRefs = useMemo(() => {
     return breadcrumbs.reduce<Record<string, () => void>>(
       (acc, { onClick }, idx) => {
-        acc[getBreadcrumbId(idx)] = onClick;
+        if (onClick) acc[getBreadcrumbId(idx)] = onClick;
         return acc;
       },
       {},
@@ -36,8 +36,8 @@ export function useBreadcrumbs(breadcrumbs: ClickableProps[]) {
 
   const payload: BreadcrumbsPayload = {
     type: 'header.breadcrumbs',
-    items: breadcrumbs.map(({ label }, idx) => ({
-      onClick: getBreadcrumbId(idx),
+    items: breadcrumbs.map(({ label, onClick }, idx) => ({
+      onClick: onClick ? getBreadcrumbId(idx) : '',
       label,
     })),
   };
@@ -80,7 +80,7 @@ export function useBreadcrumbs(breadcrumbs: ClickableProps[]) {
   }, []);
 }
 
-export function usePrimaryCta(primaryCta: ClickableProps | null) {
+export function usePrimaryCta(primaryCta: Breadcrumb | null) {
   const payload: PrimaryCtaPayload | Pick<PrimaryCtaPayload, 'type'> =
     !primaryCta
       ? { type: 'header.primaryCta' }
