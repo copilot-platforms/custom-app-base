@@ -1,9 +1,8 @@
+import { copilotApi } from 'copilot-node-sdk';
+
+import { Welcome } from '@/app/(home)/welcome';
 import { TokenGate } from '@/components/TokenGate';
 import { Container } from '@/components/Container';
-
-import 'copilot-design-system/dist/styles/main.css';
-import { copilotApi } from 'copilot-node-sdk';
-import { Welcome } from '@/app/(home)/welcome';
 
 /**
  * The revalidate property determine's the cache TTL for this page and

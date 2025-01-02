@@ -4,8 +4,6 @@ import { Body, Heading, Icon } from 'copilot-design-system';
 import { Container } from '@/components/Container';
 import { Demo } from '@/app/bridge/demo';
 
-import 'copilot-design-system/dist/styles/main.css';
-
 export default function Page() {
   return (
     <Container className="max-w-screen-lg">
