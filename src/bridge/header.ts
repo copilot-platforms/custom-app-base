@@ -63,10 +63,6 @@ export function useBreadcrumbs(
       window.parent.postMessage(payload, ensureHttps(config.portalUrl));
     }
 
-    // Be sure to add your portal domain here as well, whether it's a copilot.app
-    // subdomain or a custom domain. This allows the two frames to talk to each other.
-    // window.parent.postMessage(payload, 'https://yourportaldomain.copilot.app');
-
     const handleMessage = (event: MessageEvent) => {
       if (
         event.data.type === 'header.breadcrumbs.onClick' &&
