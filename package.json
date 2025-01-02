@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "copilot-design-system": "^0.6.16",
-    "copilot-node-sdk": "^3.0.0",
+    "copilot-node-sdk": "^3.5.0",
     "copy-container-react": "^1.0.11",
     "next": "^14.1.0",
     "open": "^10.1.0",

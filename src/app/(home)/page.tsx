@@ -21,7 +21,7 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
   console.log({ workspace, session });
   return (
     <Container>
-      <Welcome />
+      <Welcome portalUrl={workspace.portalUrl} />
     </Container>
   );
 }

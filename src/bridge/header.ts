@@ -23,7 +23,22 @@ interface Breadcrumb {
 
 const getBreadcrumbId = (idx: number) => `header.breadcrumbs.${idx}`;
 
-export function useBreadcrumbs(breadcrumbs: Breadcrumb[]) {
+const ensureHttps = (url: string) => {
+  if (url.startsWith('https://')) {
+    return url;
+  }
+  if (url.startsWith('http://')) {
+    return url.replace('http://', 'https://');
+  }
+  return `https://${url}`;
+};
+
+export function useBreadcrumbs(
+  breadcrumbs: Breadcrumb[],
+  config?: {
+    portalUrl?: string;
+  },
+) {
   const callbackRefs = useMemo(() => {
     return breadcrumbs.reduce<Record<string, () => void>>(
       (acc, { onClick }, idx) => {
@@ -44,6 +59,9 @@ export function useBreadcrumbs(breadcrumbs: Breadcrumb[]) {
 
   useEffect(() => {
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
+    if (config?.portalUrl) {
+      window.parent.postMessage(payload, ensureHttps(config.portalUrl));
+    }
 
     // Be sure to add your portal domain here as well, whether it's a copilot.app
     // subdomain or a custom domain. This allows the two frames to talk to each other.
@@ -80,7 +98,10 @@ export function useBreadcrumbs(breadcrumbs: Breadcrumb[]) {
   }, []);
 }
 
-export function usePrimaryCta(primaryCta: Breadcrumb | null) {
+export function usePrimaryCta(
+  primaryCta: Breadcrumb | null,
+  config?: { portalUrl?: string },
+) {
   const payload: PrimaryCtaPayload | Pick<PrimaryCtaPayload, 'type'> =
     !primaryCta
       ? { type: 'header.primaryCta' }
@@ -92,6 +113,9 @@ export function usePrimaryCta(primaryCta: Breadcrumb | null) {
 
   useEffect(() => {
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
+    if (config?.portalUrl) {
+      window.parent.postMessage(payload, ensureHttps(config.portalUrl));
+    }
 
     const handleMessage = (event: MessageEvent) => {
       if (
@@ -116,6 +140,12 @@ export function usePrimaryCta(primaryCta: Breadcrumb | null) {
         { type: 'header.primaryCta' },
         'https://dashboard.copilot.com',
       );
+      if (config?.portalUrl) {
+        window.parent.postMessage(
+          { type: 'header.primaryCta' },
+          ensureHttps(config.portalUrl),
+        );
+      }
     };
     addEventListener('beforeunload', handleUnload);
     return () => {

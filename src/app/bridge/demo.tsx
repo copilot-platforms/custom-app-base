@@ -5,7 +5,7 @@ import { Body, IconButton, SecondaryButton } from 'copilot-design-system';
 import { useState } from 'react';
 import { CopyBlock, monoBlue } from 'react-code-blocks';
 
-export function Demo() {
+export function Demo({ portalUrl }: { portalUrl?: string }) {
   const [breadcrumbValues, setBreadcrumbValues] = useState<string[]>([]);
   const [primaryCallToAction, setPrimaryCallToAction] = useState<string | null>(
     null,
@@ -18,6 +18,7 @@ export function Demo() {
         alert(`Clicked on ${value}`);
       },
     })),
+    { portalUrl },
   );
 
   usePrimaryCta(
@@ -29,6 +30,7 @@ export function Demo() {
             alert(`Clicked on ${primaryCallToAction}`);
           },
         },
+    { portalUrl },
   );
 
   return (

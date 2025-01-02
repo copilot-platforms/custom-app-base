@@ -9,12 +9,15 @@ import { Body, Heading, Icon } from 'copilot-design-system';
  */
 export const revalidate = 180;
 
-export function Welcome() {
-  useBreadcrumbs([
-    {
-      label: 'Home',
-    },
-  ]);
+export function Welcome({ portalUrl }: { portalUrl?: string }) {
+  useBreadcrumbs(
+    [
+      {
+        label: 'Home',
+      },
+    ],
+    { portalUrl },
+  );
 
   return (
     <>

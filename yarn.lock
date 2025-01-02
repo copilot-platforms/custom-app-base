@@ -1890,13 +1890,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copilot-node-sdk@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "copilot-node-sdk@npm:3.0.0"
+"copilot-node-sdk@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "copilot-node-sdk@npm:3.5.0"
   dependencies:
     isomorphic-fetch: "npm:^3.0.0"
     next: "npm:^14.0.2"
-  checksum: 10c0/c38ffa4504931d65ec4a2a5f886bef0fc08c5ad9970c5c2525371e70d352c302f9b6f1d96b2e9b55930c615495a981e9a00f6b1838a3375d17677553a5b8a26a
+  checksum: 10c0/3328a883edc455466f42361d9a3fdfcc9bd6ff497571a62da2babf7efc58bce4a351cddd123e46f552ed75f3874bff6d5400c2c56ed490628791cbf69ef3459f
   languageName: node
   linkType: hard
 
@@ -1979,7 +1979,7 @@ __metadata:
     "@types/react-linkify": "npm:^1"
     autoprefixer: "npm:^10.4.0"
     copilot-design-system: "npm:^0.6.16"
-    copilot-node-sdk: "npm:^3.0.0"
+    copilot-node-sdk: "npm:^3.5.0"
     copy-container-react: "npm:^1.0.11"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8.57.0"
