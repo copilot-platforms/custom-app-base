@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import 'copilot-design-system/dist/styles/main.css';
+
 export const metadata: Metadata = {
   title: 'Custom App',
   description: 'Copilot Custom App Example',
@@ -16,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={[inter.className].join(' ')}>{children}</body>
     </html>
   );
 }
