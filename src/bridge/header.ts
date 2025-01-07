@@ -70,15 +70,15 @@ export function useBreadcrumbs(
     );
   }, [breadcrumbs]);
 
-  const payload: BreadcrumbsPayload = {
-    type: 'header.breadcrumbs',
-    items: breadcrumbs.map(({ label, onClick }, idx) => ({
-      onClick: onClick ? getBreadcrumbId(idx) : '',
-      label,
-    })),
-  };
-
   useEffect(() => {
+    const payload: BreadcrumbsPayload = {
+      type: 'header.breadcrumbs',
+      items: breadcrumbs.map(({ label, onClick }, idx) => ({
+        onClick: onClick ? getBreadcrumbId(idx) : '',
+        label,
+      })),
+    };
+
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
     if (config?.portalUrl) {
       window.parent.postMessage(payload, ensureHttps(config.portalUrl));
@@ -99,7 +99,7 @@ export function useBreadcrumbs(
     return () => {
       removeEventListener('message', handleMessage);
     };
-  }, [breadcrumbs, payload]);
+  }, [breadcrumbs, callbackRefs, config?.portalUrl]);
 
   useEffect(() => {
     const handleUnload = () => {
@@ -119,17 +119,17 @@ export function usePrimaryCta(
   primaryCta: Clickable | null,
   config?: { portalUrl?: string },
 ) {
-  const payload: PrimaryCtaPayload | Pick<PrimaryCtaPayload, 'type'> =
-    !primaryCta
-      ? { type: 'header.primaryCta' }
-      : {
-          icon: primaryCta.icon,
-          label: primaryCta.label,
-          onClick: 'header.primaryCta.onClick',
-          type: 'header.primaryCta',
-        };
-
   useEffect(() => {
+    const payload: PrimaryCtaPayload | Pick<PrimaryCtaPayload, 'type'> =
+      !primaryCta
+        ? { type: 'header.primaryCta' }
+        : {
+            icon: primaryCta.icon,
+            label: primaryCta.label,
+            onClick: 'header.primaryCta.onClick',
+            type: 'header.primaryCta',
+          };
+
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
     if (config?.portalUrl) {
       window.parent.postMessage(payload, ensureHttps(config.portalUrl));
@@ -150,7 +150,7 @@ export function usePrimaryCta(
     return () => {
       removeEventListener('message', handleMessage);
     };
-  }, [primaryCta]);
+  }, [primaryCta, config?.portalUrl]);
 
   useEffect(() => {
     const handleUnload = () => {
@@ -169,23 +169,23 @@ export function usePrimaryCta(
     return () => {
       removeEventListener('beforeunload', handleUnload);
     };
-  }, []);
+  }, [config?.portalUrl]);
 }
 
 export function useSecondaryCta(
   secondaryCta: Clickable | null,
   config?: { portalUrl?: string },
 ) {
-  const payload: SecondaryCtaPayload | Pick<SecondaryCtaPayload, 'type'> =
-    !secondaryCta
-      ? { type: 'header.secondaryCta' }
-      : {
-          type: 'header.secondaryCta',
-          label: secondaryCta.label,
-          onClick: 'header.secondaryCta.onClick',
-        };
-
   useEffect(() => {
+    const payload: SecondaryCtaPayload | Pick<SecondaryCtaPayload, 'type'> =
+      !secondaryCta
+        ? { type: 'header.secondaryCta' }
+        : {
+            type: 'header.secondaryCta',
+            label: secondaryCta.label,
+            onClick: 'header.secondaryCta.onClick',
+          };
+
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
     if (config?.portalUrl) {
       window.parent.postMessage(payload, ensureHttps(config.portalUrl));
@@ -206,7 +206,7 @@ export function useSecondaryCta(
     return () => {
       removeEventListener('message', handleMessage);
     };
-  }, [secondaryCta]);
+  }, [secondaryCta, config?.portalUrl]);
 
   useEffect(() => {
     const handleUnload = () => {
@@ -225,7 +225,7 @@ export function useSecondaryCta(
     return () => {
       removeEventListener('beforeunload', handleUnload);
     };
-  }, []);
+  }, [config?.portalUrl]);
 }
 
 export function useActionsMenu(
@@ -244,16 +244,16 @@ export function useActionsMenu(
     );
   }, [actions]);
 
-  const payload: ActionsMenuPayload = {
-    type: 'header.actionsMenu',
-    items: actions.map(({ label, onClick, icon }, idx) => ({
-      onClick: onClick ? getActionMenuItemId(idx) : '',
-      label,
-      icon,
-    })),
-  };
-
   useEffect(() => {
+    const payload: ActionsMenuPayload = {
+      type: 'header.actionsMenu',
+      items: actions.map(({ label, onClick, icon }, idx) => ({
+        onClick: onClick ? getActionMenuItemId(idx) : '',
+        label,
+        icon,
+      })),
+    };
+
     window.parent.postMessage(payload, 'https://dashboard.copilot.com');
     if (config?.portalUrl) {
       window.parent.postMessage(payload, ensureHttps(config.portalUrl));
@@ -274,7 +274,7 @@ export function useActionsMenu(
     return () => {
       removeEventListener('message', handleMessage);
     };
-  }, [actions, payload]);
+  }, [actions, callbackRefs, config?.portalUrl]);
 
   useEffect(() => {
     const handleUnload = () => {

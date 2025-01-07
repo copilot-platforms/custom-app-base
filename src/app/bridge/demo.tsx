@@ -1,3 +1,5 @@
+/* eslint react/no-unescaped-entities: 0 */
+
 'use client';
 
 import {

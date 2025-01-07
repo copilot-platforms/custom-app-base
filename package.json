@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "COPILOT_ENV=local node scripts/dev.js",
+    "dev": "COPILOT_ENV=local next dev",
+    "dev:embedded": "COPILOT_ENV=local node scripts/dev.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
