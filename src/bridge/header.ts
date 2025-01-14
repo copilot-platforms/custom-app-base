@@ -182,6 +182,7 @@ export function useSecondaryCta(
         ? { type: 'header.secondaryCta' }
         : {
             type: 'header.secondaryCta',
+            icon: secondaryCta.icon,
             label: secondaryCta.label,
             onClick: 'header.secondaryCta.onClick',
           };
