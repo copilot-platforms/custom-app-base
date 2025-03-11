@@ -1872,9 +1872,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copilot-design-system@npm:^0.6.16":
-  version: 0.6.16
-  resolution: "copilot-design-system@npm:0.6.16"
+"copilot-design-system@npm:^0.6.23":
+  version: 0.6.23
+  resolution: "copilot-design-system@npm:0.6.23"
   dependencies:
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-toast": "npm:^1.2.1"
@@ -1886,17 +1886,17 @@ __metadata:
   peerDependencies:
     react: ^17
     react-dom: 17
-  checksum: 10c0/41d21f8da15e5180e17f3d99e309666e5354fef0494fc6ef38b1ef168caf08c9ef25b438064f2956e49193dc3a0d60d2e8232e64b1d8ad8858b57ce53c1ee64f
+  checksum: 10c0/71c8ce9911f63f5a9783d4acf23cf2f270f24324dc1f855ec20593aba0354fc07cb73f3b5bc2c14fe03d727936635aed74501ed8b65dc54d13000690ed1649cc
   languageName: node
   linkType: hard
 
-"copilot-node-sdk@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "copilot-node-sdk@npm:3.5.0"
+"copilot-node-sdk@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "copilot-node-sdk@npm:3.5.1"
   dependencies:
     isomorphic-fetch: "npm:^3.0.0"
     next: "npm:^14.0.2"
-  checksum: 10c0/3328a883edc455466f42361d9a3fdfcc9bd6ff497571a62da2babf7efc58bce4a351cddd123e46f552ed75f3874bff6d5400c2c56ed490628791cbf69ef3459f
+  checksum: 10c0/696ea293b145a53f13a7cb830d793327c1c275b13470412301a3769299386d11cb6d33dd70c92bbfa1548db12ad6a01fcc5bb542867f65dca07ec0b50829ceb8
   languageName: node
   linkType: hard
 
@@ -1978,8 +1978,8 @@ __metadata:
     "@types/react-dom": "npm:^18.2.0"
     "@types/react-linkify": "npm:^1"
     autoprefixer: "npm:^10.4.0"
-    copilot-design-system: "npm:^0.6.16"
-    copilot-node-sdk: "npm:^3.5.0"
+    copilot-design-system: "npm:^0.6.23"
+    copilot-node-sdk: "npm:^3.5.1"
     copy-container-react: "npm:^1.0.11"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8.57.0"

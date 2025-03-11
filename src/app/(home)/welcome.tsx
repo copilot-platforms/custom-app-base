@@ -38,7 +38,7 @@ export function Welcome({ portalUrl }: { portalUrl?: string }) {
       <div className="grid grid-cols-2 gap-8 mt-12 max-w-prose">
         <div>
           <a
-            href="https://docs.copilot.com/reference"
+            href="https://docs.copilot.app/reference"
             className="group"
             target="_blank"
             rel="noopener noreferrer"
@@ -55,7 +55,7 @@ export function Welcome({ portalUrl }: { portalUrl?: string }) {
 
         <div>
           <a
-            href="https://docs.copilot.com/docs"
+            href="https://docs.copilot.app/docs"
             className="group"
             target="_blank"
             rel="noopener noreferrer"
@@ -72,7 +72,7 @@ export function Welcome({ portalUrl }: { portalUrl?: string }) {
 
         <div>
           <a
-            href="https://www.copilot.com/experts"
+            href="https://www.copilot.app/experts"
             className="group"
             target="_blank"
             rel="noopener noreferrer"
