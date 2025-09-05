@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors https://dashboard.copilot.app/ https://*.copilot.app/ https://dashboard.assembly.com https://*.myassembly.com;
+    frame-ancestors https://dashboard.copilot.app/ https://*.copilot.app/;
     block-all-mixed-content;
     upgrade-insecure-requests;
 `;
