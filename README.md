@@ -15,6 +15,8 @@ In order to build a Copilot custom app you’ll need a knowledge of modern web d
 - Next.JS
 - Yarn (NPM, PNPM, Bun or any other Node.JS package manager are also possible, but we use Yarn)
 
+Minimum required Node.js version: 22.x
+
 ### Getting Started
 
 The easiest way to get started is to fork this repo. Once forked, you will need to deploy the app and add it to Copilot.
