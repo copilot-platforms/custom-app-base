@@ -5,11 +5,11 @@ import { Body, Heading, Button } from '@assembly-js/design-system';
 
 type Operation = 'listClients' | 'retrieveClient' | 'listCompanies' | 'retrieveCompany';
 
-const OPERATIONS: { value: Operation; label: string; needsId: boolean }[] = [
+const OPERATIONS: { value: Operation; label: string; needsId: boolean; idLabel?: string }[] = [
   { value: 'listClients', label: 'List Clients', needsId: false },
-  { value: 'retrieveClient', label: 'Get Client', needsId: true },
+  { value: 'retrieveClient', label: 'Get Client', needsId: true, idLabel: 'Client ID' },
   { value: 'listCompanies', label: 'List Companies', needsId: false },
-  { value: 'retrieveCompany', label: 'Get Company', needsId: true },
+  { value: 'retrieveCompany', label: 'Get Company', needsId: true, idLabel: 'Company ID' },
 ];
 
 type HistoryEntry = {
@@ -23,25 +23,26 @@ type HistoryEntry = {
 };
 
 export function RequestTester({ token }: { token?: string }) {
-  const [operation, setOperation] = useState<Operation>('listClients');
-  const [resourceId, setResourceId] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loadingOp, setLoadingOp] = useState<Operation | null>(null);
+  const [ids, setIds] = useState<Record<string, string>>({});
+  const [limits, setLimits] = useState<Record<string, number>>({
+    listClients: 5,
+    listCompanies: 5,
+  });
   const [history, setHistory] = useState<HistoryEntry[]>([]);
 
-  const selectedOp = OPERATIONS.find((op) => op.value === operation)!;
-
-  const handleSubmit = async () => {
-    setLoading(true);
+  const handleRequest = async (op: (typeof OPERATIONS)[number]) => {
+    setLoadingOp(op.value);
 
     try {
       const res = await fetch('/api/request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          operation,
-          id: selectedOp.needsId ? resourceId : undefined,
+          operation: op.value,
+          id: op.needsId ? ids[op.value] : undefined,
           token,
-          limit: 5,
+          limit: !op.needsId ? (limits[op.value] || 5) : undefined,
         }),
       });
 
@@ -49,8 +50,8 @@ export function RequestTester({ token }: { token?: string }) {
 
       const entry: HistoryEntry = {
         id: crypto.randomUUID(),
-        operation,
-        resourceId: selectedOp.needsId ? resourceId : undefined,
+        operation: op.value,
+        resourceId: op.needsId ? ids[op.value] : undefined,
         timestamp: new Date(),
         duration: data.duration ?? 0,
         success: data.success,
@@ -61,8 +62,8 @@ export function RequestTester({ token }: { token?: string }) {
     } catch (error) {
       const entry: HistoryEntry = {
         id: crypto.randomUUID(),
-        operation,
-        resourceId: selectedOp.needsId ? resourceId : undefined,
+        operation: op.value,
+        resourceId: op.needsId ? ids[op.value] : undefined,
         timestamp: new Date(),
         duration: 0,
         success: false,
@@ -71,14 +72,8 @@ export function RequestTester({ token }: { token?: string }) {
 
       setHistory((prev) => [entry, ...prev]);
     } finally {
-      setLoading(false);
+      setLoadingOp(null);
     }
-  };
-
-  const getIdPlaceholder = () => {
-    if (operation === 'retrieveClient') return 'Paste client ID from list results...';
-    if (operation === 'retrieveCompany') return 'Paste company ID from list results...';
-    return '';
   };
 
   return (
@@ -90,50 +85,76 @@ export function RequestTester({ token }: { token?: string }) {
         </Body>
       </div>
 
-      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
-        <div className="flex flex-wrap gap-3 items-end">
-          <div>
-            <Body size="sm" className="text-gray-500 mb-1">
-              Operation
-            </Body>
-            <select
-              value={operation}
-              onChange={(e) => {
-                setOperation(e.target.value as Operation);
-                setResourceId('');
-              }}
-              className="block w-48 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {OPERATIONS.map((op) => (
-                <option key={op.value} value={op.value}>
-                  {op.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {selectedOp.needsId && (
-            <div className="flex-1 min-w-64">
-              <Body size="sm" className="text-gray-500 mb-1">
-                ID
-              </Body>
-              <input
-                type="text"
-                value={resourceId}
-                onChange={(e) => setResourceId(e.target.value)}
-                placeholder={getIdPlaceholder()}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          )}
-
-          <Button
-            variant="primary"
-            label={loading ? 'Loading...' : 'Send Request'}
-            onClick={handleSubmit}
-            disabled={loading || (selectedOp.needsId && !resourceId)}
-          />
-        </div>
+      <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden mb-4">
+        <table className="w-full">
+          <thead>
+            <tr className="border-b border-gray-200">
+              <th className="text-left px-4 py-2">
+                <Body size="sm" className="text-gray-500 font-medium">
+                  Operation
+                </Body>
+              </th>
+              <th className="text-left px-4 py-2">
+                <Body size="sm" className="text-gray-500 font-medium">
+                  Parameters
+                </Body>
+              </th>
+              <th className="px-4 py-2 w-24"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {OPERATIONS.map((op) => (
+              <tr key={op.value} className="border-b border-gray-200 last:border-b-0">
+                <td className="px-4 py-3">
+                  <Body size="sm" className="font-medium">
+                    {op.label}
+                  </Body>
+                </td>
+                <td className="px-4 py-3">
+                  {op.needsId ? (
+                    <input
+                      type="text"
+                      value={ids[op.value] || ''}
+                      onChange={(e) =>
+                        setIds((prev) => ({ ...prev, [op.value]: e.target.value }))
+                      }
+                      placeholder={`Paste ${op.idLabel} from list results...`}
+                      className="block w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Body size="sm" className="text-gray-500">
+                        limit:
+                      </Body>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={limits[op.value] || 5}
+                        onChange={(e) =>
+                          setLimits((prev) => ({
+                            ...prev,
+                            [op.value]: parseInt(e.target.value) || 5,
+                          }))
+                        }
+                        className="w-16 px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-right">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    label={loadingOp === op.value ? '...' : 'Run'}
+                    onClick={() => handleRequest(op)}
+                    disabled={loadingOp !== null || (op.needsId && !ids[op.value])}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {history.length > 0 && (
