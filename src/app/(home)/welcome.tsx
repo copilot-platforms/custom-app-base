@@ -1,7 +1,7 @@
 'use client';
 
-import { useBreadcrumbs } from '@/bridge/header';
-import { Body, Heading, Icon } from 'copilot-design-system';
+import { useBreadcrumbs } from '@/bridge/hooks';
+import { Body, Heading, Icon } from '@assembly-js/design-system';
 
 /**
  * The revalidate property determine's the cache TTL for this page and
@@ -9,15 +9,12 @@ import { Body, Heading, Icon } from 'copilot-design-system';
  */
 export const revalidate = 180;
 
-export function Welcome({ portalUrl }: { portalUrl?: string }) {
-  useBreadcrumbs(
-    [
-      {
-        label: 'Home',
-      },
-    ],
-    { portalUrl },
-  );
+export function Welcome() {
+  useBreadcrumbs([
+    {
+      label: 'Home',
+    },
+  ]);
 
   return (
     <>

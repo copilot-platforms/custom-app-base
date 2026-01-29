@@ -4,7 +4,7 @@ const { parse } = require('url');
 const next = require('next');
 const ngrok = require('@ngrok/ngrok');
 
-const port = parseInt(process.env.PORT ?? '3000', 10);
+const port = parseInt(process.env.PORT ?? '3002', 10);
 const app = next({ dev: true });
 const handle = app.getRequestHandler();
 

@@ -1,4 +1,4 @@
-import { copilotApi } from 'copilot-node-sdk';
+import { assemblyApi } from '@assembly-js/node-sdk';
 
 import { Welcome } from '@/app/(home)/welcome';
 import { TokenGate } from '@/components/TokenGate';
@@ -12,16 +12,16 @@ export const revalidate = 180;
 
 async function Content({ searchParams }: { searchParams: SearchParams }) {
   const { token } = searchParams;
-  const copilot = copilotApi({
+  const assembly = assemblyApi({
     apiKey: process.env.COPILOT_API_KEY ?? '',
     token: typeof token === 'string' ? token : undefined,
   });
-  const workspace = await copilot.retrieveWorkspace();
-  const session = await copilot.getTokenPayload?.();
+  const workspace = await assembly.retrieveWorkspace();
+  const session = await assembly.getTokenPayload?.();
   console.log({ workspace, session });
   return (
     <Container>
-      <Welcome portalUrl={workspace.portalUrl} />
+      <Welcome />
     </Container>
   );
 }

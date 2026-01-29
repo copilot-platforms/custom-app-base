@@ -10,34 +10,35 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "copilot-design-system": "^0.6.23",
-    "copilot-node-sdk": "^3.5.1",
+    "@assembly-js/app-bridge": "^1.0.0",
+    "@assembly-js/design-system": "^2.4.0",
+    "@assembly-js/node-sdk": "^3.19.1",
     "copy-container-react": "^1.0.11",
-    "next": "^14.1.0",
+    "next": "^16.1.0",
     "open": "^10.1.0",
     "prettier-plugin-tailwindcss": "^0.5.12",
-    "react": "^18.2.0",
+    "react": "^19.0.0",
     "react-code-blocks": "^0.1.6",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.0.0",
     "react-linkify": "^1.0.0-alpha",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@ngrok/ngrok": "^1.4.1",
-    "@types/node": "^20.11.1",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/react-linkify": "^1",
     "autoprefixer": "^10.4.0",
     "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.1.0",
+    "eslint": "^9",
+    "eslint-config-next": "^16.1.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": "^22.0.0"
+    "node": "^24.0.0"
   },
   "packageManager": "yarn@4.1.0"
 }

@@ -7,18 +7,12 @@ import {
   useBreadcrumbs,
   usePrimaryCta,
   useSecondaryCta,
-} from '@/bridge/header';
-import {
-  Body,
-  Heading,
-  Icon,
-  IconButton,
-  SecondaryButton,
-} from 'copilot-design-system';
+} from '@/bridge/hooks';
+import { Body, Heading, Icon, IconButton, Button } from '@assembly-js/design-system';
 import { useState } from 'react';
 import { CopyBlock, monoBlue } from 'react-code-blocks';
 
-export function Demo({ portalUrl }: { portalUrl?: string }) {
+export function Demo() {
   const [breadcrumbValues, setBreadcrumbValues] = useState<string[]>([]);
   const [actionsMenuItems, setActionsMenuItems] = useState<string[]>([]);
   const [primaryCallToAction, setPrimaryCallToAction] = useState<string | null>(
@@ -35,7 +29,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
         alert(`Clicked on ${value}`);
       },
     })),
-    { portalUrl },
   );
 
   useActionsMenu(
@@ -46,7 +39,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
         alert(`Clicked on ${value}`);
       },
     })),
-    { portalUrl },
   );
 
   usePrimaryCta(
@@ -58,7 +50,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
             alert(`Clicked on ${primaryCallToAction}`);
           },
         },
-    { portalUrl },
   );
 
   useSecondaryCta(
@@ -70,7 +61,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
             alert(`Clicked on ${secondaryCallToAction}`);
           },
         },
-    { portalUrl },
   );
 
   return (
@@ -137,7 +127,8 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
                 </div>
               ))}
 
-              <SecondaryButton
+              <Button
+                variant="secondary"
                 onClick={() => {
                   'use client';
                   setBreadcrumbValues((breadcrumbValues) => [
@@ -146,7 +137,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
                   ]);
                 }}
                 label="Add a breadcrumb"
-                disclosure={false}
               />
             </div>
           </section>
@@ -191,7 +181,8 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
                 </div>
               ))}
 
-              <SecondaryButton
+              <Button
+                variant="secondary"
                 onClick={() => {
                   'use client';
                   setActionsMenuItems((actionsMenuItems) => [
@@ -200,7 +191,6 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
                   ]);
                 }}
                 label="Add an action"
-                disclosure={false}
               />
             </div>
           </section>
@@ -278,7 +268,7 @@ export function Demo({ portalUrl }: { portalUrl?: string }) {
               codeBlock
               text={`'use client';
 
-import { useBreadcrumbs, usePrimaryCta } from '@/bridge/header';
+import { useBreadcrumbs, usePrimaryCta } from '@/bridge/hooks';
 
 // Render this component in your page.tsx component, you can 
 // use props to pass in dynamic values from the API.

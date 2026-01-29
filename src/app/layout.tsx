@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-import 'copilot-design-system/dist/styles/main.css';
+import '@assembly-js/design-system/dist/styles/main.css';
 
 export const metadata: Metadata = {
   title: 'Custom App',
