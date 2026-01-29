@@ -7,6 +7,7 @@ import { DesignShowcase } from './sections/DesignShowcase';
 import { Resources } from './sections/Resources';
 import { RequestTester } from './sections/RequestTester';
 import { GettingStarted } from './sections/GettingStarted';
+import { MissingApiKey } from './sections/MissingApiKey';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,6 +35,11 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
 export default async function Home({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const params = await searchParams;
   const hasToken = 'token' in params && typeof params.token === 'string';
+
+  // Check for API key before proceeding
+  if (!process.env.ASSEMBLY_API_KEY) {
+    return <MissingApiKey />;
+  }
 
   if (!hasToken) {
     return <GettingStarted />;

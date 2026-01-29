@@ -19,9 +19,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@assembly-js/design-system@file:../design-system::locator=custom-app-base%40workspace%3A.":
+"@assembly-js/design-system@npm:^2.4.0":
   version: 2.4.0
-  resolution: "@assembly-js/design-system@file:../design-system#../design-system::hash=4affed&locator=custom-app-base%40workspace%3A."
+  resolution: "@assembly-js/design-system@npm:2.4.0"
   dependencies:
     "@radix-ui/react-avatar": "npm:^1.0.4"
     "@radix-ui/react-toast": "npm:^1.2.1"
@@ -33,7 +33,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 10c0/70f05de5bc757846da6b2b3e2974b6cb18346edd68a909540c48f21d39d4184c535dfe1ce7bc898cba9c5a6085beb773a55eb1e1c8e84963e817fbb40ec660ee
+  checksum: 10c0/445045888e4048513571e859b1cfd7ee4511d624f78105ed11529aa901b46af4b2ba0a6e2bed4c982257b3499c591d4b3bf4a779a6605f8cdeb164a35c9e8dcd
   languageName: node
   linkType: hard
 
@@ -2566,7 +2566,7 @@ __metadata:
   resolution: "custom-app-base@workspace:."
   dependencies:
     "@assembly-js/app-bridge": "npm:^1.0.0"
-    "@assembly-js/design-system": "file:../design-system"
+    "@assembly-js/design-system": "npm:^2.4.0"
     "@assembly-js/node-sdk": "npm:^3.19.1"
     "@ngrok/ngrok": "npm:^1.4.1"
     "@types/node": "npm:^24"
