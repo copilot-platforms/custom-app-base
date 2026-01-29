@@ -1,14 +1,10 @@
 import Image from 'next/image';
-import { TokenGate } from '@/components/TokenGate';
 import { Container } from '@/components/Container';
+import { GettingStarted } from '@/app/(home)/sections/GettingStarted';
 
-/**
- * The revalidate property determine's the cache TTL for this page and
- * all fetches that occur within it. This value is in seconds.
- */
-export const revalidate = 180;
+export const dynamic = 'force-dynamic';
 
-async function Content() {
+function Content() {
   return (
     <Container>
       <div className="w-full items-center justify-between font-mono text-sm lg:flex">
@@ -18,14 +14,14 @@ async function Content() {
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center lg:static lg:h-auto lg:w-auto">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://copilot.app"
+            href="https://assembly.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             By{' '}
             <Image
               src="/copilot_icon.png"
-              alt="Copilot Icon"
+              alt="Assembly Icon"
               className="dark:invert"
               width={24}
               height={24}
@@ -50,11 +46,14 @@ async function Content() {
 export default async function Page({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
-  return (
-    <TokenGate searchParams={searchParams}>
-      <Content />
-    </TokenGate>
-  );
+  const params = await searchParams;
+  const hasToken = 'token' in params && typeof params.token === 'string';
+
+  if (!hasToken) {
+    return <GettingStarted />;
+  }
+
+  return <Content />;
 }
