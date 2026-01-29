@@ -1,35 +1,7 @@
 'use client';
 
 import { Body, Heading } from '@assembly-js/design-system';
-
-type SessionData = {
-  workspace: {
-    id?: string;
-    name?: string;
-    logoUrl?: string;
-    portalUrl?: string;
-  };
-  client?: {
-    id?: string;
-    givenName?: string;
-    familyName?: string;
-    email?: string;
-    avatarImageUrl?: string;
-  };
-  company?: {
-    id?: string;
-    name?: string;
-    iconImageUrl?: string;
-  };
-  internalUser?: {
-    id?: string;
-    givenName?: string;
-    familyName?: string;
-    email?: string;
-    avatarImageUrl?: string;
-    role?: string;
-  };
-};
+import type { SessionData } from '@/utils/session';
 
 function UserTypeBadge({ isInternal }: { isInternal: boolean }) {
   return (

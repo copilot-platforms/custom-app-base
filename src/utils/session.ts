@@ -48,3 +48,5 @@ export async function getSession(searchParams: SearchParams) {
 
   return data;
 }
+
+export type SessionData = Awaited<ReturnType<typeof getSession>>;
