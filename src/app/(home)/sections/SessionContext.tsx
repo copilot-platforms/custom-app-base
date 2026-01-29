@@ -118,9 +118,25 @@ export function SessionContext({ session }: { session: SessionData }) {
 
         {session.workspace && (
           <InfoCard title="Workspace">
-            <Body size="sm" className="text-gray-500 truncate">
-              ID: {session.workspace.id}
-            </Body>
+            <div className="flex items-center gap-3">
+              {session.workspace.squareIconUrl && (
+                <img
+                  src={session.workspace.squareIconUrl}
+                  alt={session.workspace.brandName || 'Workspace'}
+                  className="w-10 h-10 rounded object-contain"
+                />
+              )}
+              <div className="min-w-0 flex-1">
+                <Body size="base" className="font-medium truncate">
+                  {session.workspace.brandName || 'Unnamed Workspace'}
+                </Body>
+                {session.workspace.portalUrl && (
+                  <Body size="sm" className="text-gray-500 truncate">
+                    {session.workspace.portalUrl}
+                  </Body>
+                )}
+              </div>
+            </div>
           </InfoCard>
         )}
 
