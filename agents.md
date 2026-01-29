@@ -38,7 +38,7 @@ The API key must stay server-side only. Never expose it to the client.
 yarn dev
 ```
 
-This starts the app on port 3004 and opens the Assembly dev-mode page.
+This starts the app on port 8080 and opens the Assembly dev-mode page.
 
 ## Using the Node SDK
 
@@ -69,7 +69,9 @@ if (tokenPayload?.clientId) {
   const client = await assembly.retrieveClient({ id: tokenPayload.clientId });
 }
 if (tokenPayload?.internalUserId) {
-  const user = await assembly.retrieveInternalUser({ id: tokenPayload.internalUserId });
+  const user = await assembly.retrieveInternalUser({
+    id: tokenPayload.internalUserId,
+  });
 }
 ```
 

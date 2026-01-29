@@ -1,8 +1,9 @@
 require('dotenv').config({ path: ['.env.local', '.env.personal'] });
 const { spawn } = require('child_process');
 
-const port = 3004;
-const dashboardUrl = process.env.ASSEMBLY_DASHBOARD_URL || 'http://localhost:3000';
+const port = 8080;
+const dashboardUrl =
+  process.env.ASSEMBLY_DASHBOARD_URL || 'http://localhost:3000';
 const devModeUrl = `${dashboardUrl}/dev-mode?url=http://localhost:${port}`;
 
 async function main() {

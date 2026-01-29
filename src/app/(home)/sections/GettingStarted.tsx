@@ -1,7 +1,8 @@
 import { Container } from '@/components/Container';
 
-const DASHBOARD_URL = process.env.ASSEMBLY_DASHBOARD_URL || 'https://dashboard.assembly.com';
-const DEV_MODE_URL = `${DASHBOARD_URL}/dev-mode?url=http://localhost:3004`;
+const DASHBOARD_URL =
+  process.env.ASSEMBLY_DASHBOARD_URL || 'https://dashboard.assembly.com';
+const DEV_MODE_URL = `${DASHBOARD_URL}/dev-mode?url=http://localhost:8080`;
 
 export function GettingStarted() {
   return (
