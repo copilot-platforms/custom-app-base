@@ -1,8 +1,8 @@
-const GUTTERS_CLASSNAME = 'px-5 md:px-9 py-16';
+const GUTTERS_CLASSNAME = 'px-9 py-8';
 
 /**
- * The container component is a good wrapper that matches the
- * layout of center aligned apps in Copilot.
+ * The container component is a wrapper for app content that aligns
+ * with the platform header padding.
  */
 export function Container({
   children,
@@ -16,7 +16,7 @@ export function Container({
   return (
     <main
       className={[
-        'flex min-h-screen flex-col place-self-center max-w-full',
+        'flex min-h-screen flex-col max-w-full',
         gutters ? GUTTERS_CLASSNAME : '',
         className,
       ].join(' ')}

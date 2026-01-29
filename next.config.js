@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    COPILOT_ENV: process.env.COPILOT_ENV,
+    ASSEMBLY_ENV: process.env.ASSEMBLY_ENV,
   },
   headers: async () => {
     return [

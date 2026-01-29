@@ -8,7 +8,7 @@ import '@assembly-js/design-system/dist/styles/main.css';
 
 export const metadata: Metadata = {
   title: 'Custom App',
-  description: 'Copilot Custom App Example',
+  description: 'Assembly Custom App Example',
 };
 
 export default function RootLayout({

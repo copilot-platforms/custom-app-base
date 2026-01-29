@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import {
   AssemblyBridge,
   type BreadcrumbItem,
@@ -32,18 +32,33 @@ interface Clickable {
  * ]);
  */
 export function useBreadcrumbs(breadcrumbs: Clickable[]) {
+  // Use a ref to store the latest callbacks without triggering re-renders
+  const callbacksRef = useRef<Map<string, (() => void) | undefined>>(new Map());
+
+  // Create a stable key based on labels only
+  const labelsKey = breadcrumbs.map((b) => b.label).join('\0');
+
+  // Update the callbacks ref on each render
+  callbacksRef.current.clear();
+  breadcrumbs.forEach((b) => {
+    callbacksRef.current.set(b.label, b.onClick);
+  });
+
   const items: BreadcrumbItem[] = useMemo(
     () =>
-      breadcrumbs.map(({ label, onClick }) => ({
+      breadcrumbs.map(({ label }) => ({
         label,
-        onClick,
+        onClick: () => callbacksRef.current.get(label)?.(),
       })),
-    [breadcrumbs],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [labelsKey],
   );
 
   useEffect(() => {
+    console.log('[useBreadcrumbs] Setting breadcrumbs:', items.map(i => i.label));
     AssemblyBridge.header.setBreadcrumbs(items);
     return () => {
+      console.log('[useBreadcrumbs] Cleanup: clearing breadcrumbs');
       AssemblyBridge.header.setBreadcrumbs([]);
     };
   }, [items]);
@@ -63,14 +78,21 @@ export function useBreadcrumbs(breadcrumbs: Clickable[]) {
  * });
  */
 export function usePrimaryCta(config: Clickable | null) {
+  const callbackRef = useRef<(() => void) | undefined>(undefined);
+  callbackRef.current = config?.onClick;
+
+  // Create a stable key based on label and icon only
+  const configKey = config ? `${config.label}\0${config.icon ?? ''}` : null;
+
   const ctaConfig: CtaConfig | null = useMemo(() => {
     if (!config || !config.onClick) return null;
     return {
       label: config.label,
       icon: config.icon as CtaIcon | undefined,
-      onClick: config.onClick,
+      onClick: () => callbackRef.current?.(),
     };
-  }, [config]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configKey]);
 
   useEffect(() => {
     AssemblyBridge.header.setPrimaryCta(ctaConfig);
@@ -93,14 +115,21 @@ export function usePrimaryCta(config: Clickable | null) {
  * });
  */
 export function useSecondaryCta(config: Clickable | null) {
+  const callbackRef = useRef<(() => void) | undefined>(undefined);
+  callbackRef.current = config?.onClick;
+
+  // Create a stable key based on label and icon only
+  const configKey = config ? `${config.label}\0${config.icon ?? ''}` : null;
+
   const ctaConfig: CtaConfig | null = useMemo(() => {
     if (!config || !config.onClick) return null;
     return {
       label: config.label,
       icon: config.icon as CtaIcon | undefined,
-      onClick: config.onClick,
+      onClick: () => callbackRef.current?.(),
     };
-  }, [config]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [configKey]);
 
   useEffect(() => {
     AssemblyBridge.header.setSecondaryCta(ctaConfig);
@@ -123,16 +152,34 @@ export function useSecondaryCta(config: Clickable | null) {
  * ]);
  */
 export function useActionsMenu(actions: Clickable[]) {
+  // Use a ref to store the latest callbacks without triggering re-renders
+  const callbacksRef = useRef<Map<string, () => void>>(new Map());
+
+  // Create a stable key based on labels and icons only
+  const actionsKey = actions
+    .filter((a) => a.onClick !== undefined)
+    .map((a) => `${a.label}\0${a.icon ?? ''}`)
+    .join('\n');
+
+  // Update the callbacks ref on each render
+  callbacksRef.current.clear();
+  actions.forEach((a) => {
+    if (a.onClick) {
+      callbacksRef.current.set(a.label, a.onClick);
+    }
+  });
+
   const items: ActionMenuItem[] = useMemo(
     () =>
       actions
         .filter((action) => action.onClick !== undefined)
-        .map(({ label, icon, onClick }) => ({
+        .map(({ label, icon }) => ({
           label,
           icon,
-          onClick: onClick!,
+          onClick: () => callbacksRef.current.get(label)?.(),
         })),
-    [actions],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [actionsKey],
   );
 
   useEffect(() => {

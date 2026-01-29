@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "COPILOT_ENV=local next dev",
-    "dev:embedded": "COPILOT_ENV=local node scripts/dev.js",
+    "dev": "node scripts/dev-local.js",
+    "dev:embedded": "ASSEMBLY_ENV=local node scripts/dev.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@assembly-js/app-bridge": "^1.0.0",
-    "@assembly-js/design-system": "^2.4.0",
+    "@assembly-js/design-system": "file:../design-system",
     "@assembly-js/node-sdk": "^3.19.1",
     "copy-container-react": "^1.0.11",
     "next": "^16.1.0",
