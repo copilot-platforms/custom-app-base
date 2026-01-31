@@ -11,6 +11,29 @@ import {
 } from '@assembly-js/app-bridge';
 
 /**
+ * React hook to configure the app bridge with workspace-specific allowed origins.
+ * Should be called early in the app lifecycle with the workspace portal URL.
+ *
+ * @param portalUrl - The workspace's portal URL (e.g., "portal.example.com")
+ *
+ * @example
+ * // In a client component that receives portalUrl from server
+ * useBridgeConfig(workspace.portalUrl);
+ */
+export function useBridgeConfig(portalUrl: string | undefined | null) {
+  const hasConfigured = useRef(false);
+
+  useEffect(() => {
+    if (portalUrl && !hasConfigured.current) {
+      AssemblyBridge.configure({
+        additionalOrigins: [`https://${portalUrl}`],
+      });
+      hasConfigured.current = true;
+    }
+  }, [portalUrl]);
+}
+
+/**
  * Configuration for a clickable item (breadcrumb, CTA, or action menu item).
  */
 interface Clickable {
@@ -54,14 +77,17 @@ export function useBreadcrumbs(breadcrumbs: Clickable[]) {
     [labelsKey],
   );
 
+  // Send breadcrumbs when items change
   useEffect(() => {
-    console.log('[useBreadcrumbs] Setting breadcrumbs:', items.map(i => i.label));
     AssemblyBridge.header.setBreadcrumbs(items);
+  }, [items]);
+
+  // Separate cleanup effect that only runs on unmount
+  useEffect(() => {
     return () => {
-      console.log('[useBreadcrumbs] Cleanup: clearing breadcrumbs');
       AssemblyBridge.header.setBreadcrumbs([]);
     };
-  }, [items]);
+  }, []);
 }
 
 /**
