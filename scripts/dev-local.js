@@ -3,7 +3,7 @@ const { spawn } = require('child_process');
 
 const port = 8080;
 const dashboardUrl =
-  process.env.ASSEMBLY_DASHBOARD_URL || 'http://localhost:3000';
+  process.env.ASSEMBLY_DASHBOARD_URL || 'https://dashboard.assembly.com';
 const devModeUrl = `${dashboardUrl}/dev-mode?url=http://localhost:${port}`;
 
 async function main() {

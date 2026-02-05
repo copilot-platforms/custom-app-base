@@ -8,6 +8,7 @@ import { Resources } from './sections/Resources';
 import { RequestTester } from './sections/RequestTester';
 import { GettingStarted } from './sections/GettingStarted';
 import { MissingApiKey } from './sections/MissingApiKey';
+import { BridgeConfigProvider } from './sections/BridgeConfigProvider';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,16 +20,19 @@ async function Content({ searchParams }: { searchParams: SearchParams }) {
       : undefined;
 
   return (
-    <Container className="max-w-screen-lg">
-      <Header />
-      <div className="space-y-12">
-        <Resources />
-        <SessionContext session={session} />
-        <RequestTester token={token} />
-        <HeaderControls />
-        <DesignShowcase />
-      </div>
-    </Container>
+    <>
+      <BridgeConfigProvider portalUrl={session.workspace?.portalUrl} />
+      <Container className="max-w-screen-lg">
+        <Header />
+        <div className="space-y-12">
+          <Resources />
+          <SessionContext session={session} />
+          <RequestTester token={token} />
+          <HeaderControls />
+          <DesignShowcase />
+        </div>
+      </Container>
+    </>
   );
 }
 

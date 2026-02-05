@@ -10,6 +10,34 @@ import {
   type Icon,
 } from '@assembly-js/app-bridge';
 
+// Module-level flag to ensure bridge is only configured once across all instances
+let bridgeConfigured = false;
+
+/**
+ * React hook to configure the app bridge with workspace-specific allowed origins.
+ * Should be called early in the app lifecycle with the workspace portal URL.
+ * Only configures once per application, even if called multiple times.
+ *
+ * @param portalUrl - The workspace's portal URL (e.g., "portal.example.com")
+ *
+ * @example
+ * // In a client component that receives portalUrl from server
+ * useBridgeConfig(workspace.portalUrl);
+ */
+export function useBridgeConfig(portalUrl: string | undefined | null) {
+  useEffect(() => {
+    if (portalUrl && !bridgeConfigured) {
+      // Strip any existing protocol to avoid double-protocol URLs
+      const cleanUrl = portalUrl.replace(/^https?:\/\//, '');
+      AssemblyBridge.configure({
+        additionalOrigins: [`https://${cleanUrl}`],
+      });
+      bridgeConfigured = true;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+}
+
 /**
  * Configuration for a clickable item (breadcrumb, CTA, or action menu item).
  */
@@ -54,14 +82,17 @@ export function useBreadcrumbs(breadcrumbs: Clickable[]) {
     [labelsKey],
   );
 
+  // Send breadcrumbs when items change
   useEffect(() => {
-    console.log('[useBreadcrumbs] Setting breadcrumbs:', items.map(i => i.label));
     AssemblyBridge.header.setBreadcrumbs(items);
+  }, [items]);
+
+  // Separate cleanup effect that only runs on unmount
+  useEffect(() => {
     return () => {
-      console.log('[useBreadcrumbs] Cleanup: clearing breadcrumbs');
       AssemblyBridge.header.setBreadcrumbs([]);
     };
-  }, [items]);
+  }, []);
 }
 
 /**
