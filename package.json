@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@assembly-js/app-bridge": "^1.1.0",
-    "@assembly-js/design-system": "^2.4.0",
+    "@assembly-js/design-system": "^3.0.0",
     "@assembly-js/node-sdk": "^3.19.1",
     "copy-container-react": "^1.0.11",
     "next": "^16.1.0",
