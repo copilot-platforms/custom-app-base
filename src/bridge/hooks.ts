@@ -10,9 +10,13 @@ import {
   type Icon,
 } from '@assembly-js/app-bridge';
 
+// Module-level flag to ensure bridge is only configured once across all instances
+let bridgeConfigured = false;
+
 /**
  * React hook to configure the app bridge with workspace-specific allowed origins.
  * Should be called early in the app lifecycle with the workspace portal URL.
+ * Only configures once per application, even if called multiple times.
  *
  * @param portalUrl - The workspace's portal URL (e.g., "portal.example.com")
  *
@@ -21,16 +25,17 @@ import {
  * useBridgeConfig(workspace.portalUrl);
  */
 export function useBridgeConfig(portalUrl: string | undefined | null) {
-  const hasConfigured = useRef(false);
-
   useEffect(() => {
-    if (portalUrl && !hasConfigured.current) {
+    if (portalUrl && !bridgeConfigured) {
+      // Strip any existing protocol to avoid double-protocol URLs
+      const cleanUrl = portalUrl.replace(/^https?:\/\//, '');
       AssemblyBridge.configure({
-        additionalOrigins: [`https://${portalUrl}`],
+        additionalOrigins: [`https://${cleanUrl}`],
       });
-      hasConfigured.current = true;
+      bridgeConfigured = true;
     }
-  }, [portalUrl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }
 
 /**

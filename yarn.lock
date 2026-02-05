@@ -12,10 +12,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@assembly-js/app-bridge@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@assembly-js/app-bridge@npm:1.0.0"
-  checksum: 10c0/91efe223b4d2650420c7b448c0261aa630f1251c4781ad504a8bfc69cbe4ee819c93f04b8e541ef27c2f5a6fea886beb6cc24127d5b6cf9089aa94a0f2945c18
+"@assembly-js/app-bridge@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@assembly-js/app-bridge@npm:1.1.0"
+  checksum: 10c0/5584c815c0618146dd76a55e27fd0567de47f09e5f145a87c413bf3991cc4c707481697da1af9d97a7814e22696f003d6c5b903b6df5e31cf04df1b7eb25907e
   languageName: node
   linkType: hard
 
@@ -2565,7 +2565,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-app-base@workspace:."
   dependencies:
-    "@assembly-js/app-bridge": "npm:^1.0.0"
+    "@assembly-js/app-bridge": "npm:^1.1.0"
     "@assembly-js/design-system": "npm:^2.4.0"
     "@assembly-js/node-sdk": "npm:^3.19.1"
     "@ngrok/ngrok": "npm:^1.4.1"
