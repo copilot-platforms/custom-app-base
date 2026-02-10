@@ -11,14 +11,12 @@
   },
   "dependencies": {
     "@assembly-js/app-bridge": "^1.1.0",
-    "@assembly-js/design-system": "^3.0.0",
+    "@assembly-js/design-system": "^3.0.1",
     "@assembly-js/node-sdk": "^3.19.1",
-    "copy-container-react": "^1.0.11",
     "next": "^16.1.0",
     "open": "^10.1.0",
     "prettier-plugin-tailwindcss": "^0.5.12",
     "react": "^19.0.0",
-    "react-code-blocks": "^0.1.6",
     "react-dom": "^19.0.0",
     "react-linkify": "^1.0.0-alpha",
     "zod": "^3.22.4"
