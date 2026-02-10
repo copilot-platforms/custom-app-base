@@ -28,7 +28,7 @@ app.prepare().then(async () => {
   const ngrokUrl = listener.url();
 
   const { default: open, apps } = await import('open');
-  const url = `https://dashboard.copilot.app/dev-mode?url=${encodeURIComponent(
+  const url = `https://dashboard.assembly.com/dev-mode?url=${encodeURIComponent(
     ngrokUrl,
   )}`;
 
